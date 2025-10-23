@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پورٹل علم اسلامی | Islamic Knowledge Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5f2d;
+            --secondary: #97bc62;
+            --accent: #ffd700;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        [dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        [dir="ltr"] {
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 8px 15px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 10px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(44,95,45,0.9), rgba(151,188,98,0.9));
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        /* Categories Grid */
+        .categories {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .article-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .article-body {
+            padding: 20px;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 0.85rem;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        [dir="rtl"] .modal-close {
+            left: auto;
+            right: 20px;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+            line-height: 1.8;
+        }
+
+        .modal-body h4 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 26, 0.95);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1 id="siteTitle">پورٹل علم اسلامی</h1>
+                </div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="fa">فارسی</button>
+                    <button class="lang-btn" data-lang="ur">اردو</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" data-page="home" id="navHome">خانه</a></li>
+                    <li><a href="#articles" class="nav-link" data-page="articles" id="navArticles">مقالات</a></li>
+                    <li><a href="#categories" class="nav-link" data-page="categories" id="navCategories">دسته‌بندی‌ها</a></li>
+                    <li><a href="#about" class="nav-link" data-page="about" id="navAbout">درباره</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <h2 id="heroTitle">به پورٹل علم اسلامی خوش آمدید</h2>
+                <p id="heroSubtitle">مرجع جامع دانش دینی به سه زبان</p>
+            </div>
+
+            <h2 class="section-title" id="featuredTitle">مقالات برگزیده</h2>
+            <div id="featuredArticles" class="articles-grid"></div>
+        </div>
+
+        <!-- Articles Page -->
+        <div id="articles" class="page">
+            <h2 class="section-title" id="allArticlesTitle">همه مقالات</h2>
+            <div id="allArticles" class="articles-grid"></div>
+        </div>
+
+        <!-- Categories Page -->
+        <div id="categories" class="page">
+            <h2 class="section-title" id="categoriesTitle">دسته‌بندی موضوعات</h2>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="hero">
+                <h2 id="aboutTitle">درباره پورٹل علم اسلامی</h2>
+                <p id="aboutContent">این پلتفرم با هدف ارائه دانش اسلامی معتبر و جامع در سه زبان فارسی، اردو و انگلیسی ایجاد شده است.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close">&times;</button>
+                <h2 id="modalTitle"></h2>
+                <span id="modalCategory" class="article-category"></span>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p id="footerText">&copy; 2024 پورٹل علم اسلامی - تمامی حقوق محفوظ است</p>
+            <p id="footerLangs">Available in: فارسی | اردو | English</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            fa: {
+                siteTitle: "پورٹل علم اسلامی",
+                navHome: "خانه",
+                navArticles: "مقالات",
+                navCategories: "دسته‌بندی‌ها",
+                navAbout: "درباره",
+                heroTitle: "به پورٹل علم اسلامی خوش آمدید",
+                heroSubtitle: "مرجع جامع دانش دینی به سه زبان",
+                featuredTitle: "مقالات برگزیده",
+                allArticlesTitle: "همه مقالات",
+                categoriesTitle: "دسته‌بندی موضوعات",
+                aboutTitle: "درباره پورٹل علم اسلامی",
+                aboutContent: "این پلتفرم با هدف ارائه دانش اسلامی معتبر و جامع در سه زبان فارسی، اردو و انگلیسی ایجاد شده است.",
+                footerText: "© 2024 پورٹل علم اسلامی - تمامی حقوق محفوظ است",
+                readMore: "ادامه مطلب"
+            },
+            ur: {
+                siteTitle: "اسلامی علم کا پورٹل",
+                navHome: "گھر",
+                navArticles: "مضامین",
+                navCategories: "زمرے",
+                navAbout: "تعارف",
+                heroTitle: "اسلامی علم کے پورٹل میں خوش آمدید",
+                heroSubtitle: "تین زبانوں میں جامع دینی علم کا مرجع",
+                featuredTitle: "منتخب مضامین",
+                allArticlesTitle: "تمام مضامین",
+                categoriesTitle: "موضوعات کی تقسیم",
+                aboutTitle: "اسلامی علم کے پورٹل کا تعارف",
+                aboutContent: "یہ پلیٹ فارم فارسی، اردو اور انگریزی تین زبانوں میں معتبر اور جامع اسلامی علم فراہم کرنے کے مقصد سے بنایا گیا ہے۔",
+                footerText: "© 2024 اسلامی علم کا پورٹل - تمام حقوق محفوظ ہیں",
+                readMore: "مزید پڑھیں"
+            },
+            en: {
+                siteTitle: "Islamic Knowledge Portal",
+                navHome: "Home",
+                navArticles: "Articles",
+                navCategories: "Categories",
+                navAbout: "About",
+                heroTitle: "Welcome to Islamic Knowledge Portal",
+                heroSubtitle: "Comprehensive religious knowledge in three languages",
+                featuredTitle: "Featured Articles",
+                allArticlesTitle: "All Articles",
+                categoriesTitle: "Topic Categories",
+                aboutTitle: "About Islamic Knowledge Portal",
+                aboutContent: "This platform is created to provide authentic and comprehensive Islamic knowledge in three languages: Persian, Urdu, and English.",
+                footerText: "© 2024 Islamic Knowledge Portal - All rights reserved",
+                readMore: "Read more"
+            }
+        };
+
+        // Articles Data (15 comprehensive articles)
+        const articles = [
+            {
+                id: 1,
+                category: { fa: "قرآن کریم", ur: "قرآن کریم", en: "Holy Quran" },
+                title: {
+                    fa: "معجزات علمی قرآن",
+                    ur: "قرآن کے سائنسی معجزات",
+                    en: "Scientific Miracles of the Quran"
+                },
+                excerpt: {
+                    fa: "بررسی برخی از معجزات علمی قرآن که قرن‌ها پیش از کشفیات علمی مطرح شده‌اند.",
+                    ur: "قرآن کے کچھ سائنسی معجزات کا جائزہ جو سائنسی دریافتوں سے صدیوں پہلے بیان ہوئے۔",
+                    en: "Exploring scientific miracles mentioned in the Quran centuries before modern discoveries."
+                },
+                content: {
+                    fa: `<h4>مقدمه</h4>
+                    <p>قرآن کریم کتابی است که ۱۴۰۰ سال پیش نازل شده، اما حاوی حقایقی است که تنها در قرن اخیر کشف شده‌اند.</p>
+                    
+                    <h4>خلقت جنین</h4>
+                    <p>قرآن مراحل دقیق رشد جنین را شرح می‌دهد: "و لقد خلقنا الانسان من سلاله من طین" - انسان را از عصاره‌ای از گل آفریدیم.</p>
+                    
+                    <h4>انبساط کیهان</h4>
+                    <p>"والسماء بنیناها بایدٍ وانا لموسعون" - آسمان را با قدرت بنا کردیم و ما آن را وسعت می‌بخشیم.</p>
+                    
+                    <h4>چرخه آب</h4>
+                    <p>قرآن چرخه کامل آب در طبیعت را توصیف می‌کند که تنها در دوران معاصر به طور کامل فهمیده شد.</p>`,
+                    
+                    ur: `<h4>تمہید</h4>
+                    <p>قرآن کریم وہ کتاب ہے جو 1400 سال پہلے نازل ہوئی، لیکن ایسی حقیقتیں رکھتی ہے جو صرف حالیہ صدی میں دریافت ہوئیں۔</p>
+                    
+                    <h4>جنین کی تخلیق</h4>
+                    <p>قرآن جنین کی نشوونما کے درست مراحل بیان کرتا ہے: "ولقد خلقنا الانسان من سلالۃ من طین" - ہم نے انسان کو مٹی کے خلاصے سے پیدا کیا۔</p>
+                    
+                    <h4>کائنات کی پھیلاؤ</h4>
+                    <p>"والسماء بنیناھا بایدٍ وانا لموسعون" - اور آسمان کو ہم نے طاقت سے بنایا اور ہم اسے وسعت دے رہے ہیں۔</p>
+                    
+                    <h4>پانی کا چکر</h4>
+                    <p>قرآن قدرت میں پانی کے مکمل چکر کو بیان کرتا ہے جو صرف جدید دور میں مکمل طور پر سمجھا گیا۔</p>`,
+                    
+                    en: `<h4>Introduction</h4>
+                    <p>The Holy Quran is a book revealed 1400 years ago, yet contains facts only discovered in recent centuries.</p>
+                    
+                    <h4>Embryonic Development</h4>
+                    <p>The Quran describes precise stages of fetal development: "We created man from an extract of clay."</p>
+                    
+                    <h4>Expanding Universe</h4>
+                    <p>"And the heaven We constructed with strength, and indeed, We are [its] expander."</p>
+                    
+                    <h4>Water Cycle</h4>
+                    <p>The Quran describes the complete water cycle in nature, fully understood only in modern times.</p>`
+                }
+            },
+            {
+                id: 2,
+                category: { fa: "حدیث", ur: "حدیث", en: "Hadith" },
+                title: {
+                    fa: "اهمیت صله رحم در احادیث",
+                    ur: "احادیث میں صلہ رحمی کی اہمیت",
+                    en: "Importance of Family Ties in Hadith"
+                },
+                excerpt: {
+                    fa: "نگاهی به احادیث نبوی درباره اهمیت حفظ پیوندهای خانوادگی",
+                    ur: "خاندانی رشتوں کی حفاظت کی اہمیت پر نبوی احادیث کا جائزہ",
+                    en: "Prophetic traditions on maintaining family relationships"
+                },
+                content: {
+                    fa: `<h4>فضیلت صله رحم</h4>
+                    <p>پیامبر اکرم (ص) فرمود: "من احب ان یبسط له فی رزقه و ینسا له فی اثره فلیصل رحمه"</p>
+                    <p>کسی که دوست دارد روزی‌اش وسعت یابد و عمرش طولانی شود، باید صله رحم کند.</p>
+                    
+                    <h4>پاداش صله رحم</h4>
+                    <p>صله رحم موجب برکت در زندگی، افزایش روزی و طول عمر می‌شود.</p>
+                    
+                    <h4>عواقب قطع رحم</h4>
+                    <p>قطع رابطه با خویشاوندان از گناهان کبیره است و موجب دوری از رحمت الهی.</p>`,
+                    
+                    ur: `<h4>صلہ رحمی کی فضیلت</h4>
+                    <p>نبی کریم ﷺ نے فرمایا: "جو چاہتا ہے کہ اس کی روزی میں وسعت ہو اور اس کی عمر دراز ہو تو اسے چاہیے کہ صلہ رحمی کرے۔"</p>
+                    
+                    <h4>صلہ رحمی کا اجر</h4>
+                    <p>صلہ رحمی زندگی میں برکت، رزق میں اضافہ اور عمر کی درازی کا باعث بنتی ہے۔</p>
+                    
+                    <h4>قطع رحمی کے نتائج</h4>
+                    <p>رشتہ داروں سے تعلق توڑنا کبیرہ گناہوں میں سے ہے اور الہی رحمت سے دوری کا سبب ہے۔</p>`,
+                    
+                    en: `<h4>Virtue of Maintaining Ties</h4>
+                    <p>The Prophet ﷺ said: "Whoever wishes to have his provision expanded and his life prolonged, let him maintain ties of kinship."</p>
+                    
+                    <h4>Rewards</h4>
+                    <p>Maintaining family ties brings blessings, increased provision, and longevity.</p>
+                    
+                    <h4>Consequences of Breaking Ties</h4>
+                    <p>Severing family relationships is a major sin and distances one from divine mercy.</p>`
+                }
+            },
+            {
+                id: 3,
+                category: { fa: "فقه", ur: "فقہ", en: "Jurisprudence" },
+                title: {
+                    fa: "احکام نماز جماعت",
+                    ur: "نماز باجماعت کے احکام",
+                    en: "Rules of Congregational Prayer"
+                },
+                excerpt: {
+                    fa: "شرایط و احکام اقامه نماز جماعت در فقه اسلامی",
+                    ur: "اسلامی فقہ میں نماز باجماعت کی شرائط اور احکام",
+                    en: "Conditions and rulings of congregational prayer in Islamic law"
+                },
+                content: {
+                    fa: `<h4>فضیلت نماز جماعت</h4>
+                    <p>نماز جماعت ۲۷ برابر بهتر از نماز فردی است.</p>
+                    
+                    <h4>شرایط امام جماعت</h4>
+                    <p>امام باید عادل، با تقوا و آشنا به احکام باشد.</p>
+                    
+                    <h4>آداب نماز جماعت</h4>
+                    <p>حضور در مسجد، رعایت صف‌بندی و متابعت از امام از آداب مهم است.</p>`,
+                    
+                    ur: `<h4>نماز باجماعت کی فضیلت</h4>
+                    <p>نماز باجماعت انفرادی نماز سے 27 گنا بہتر ہے۔</p>
+                    
+                    <h4>امام کی شرائط</h4>
+                    <p>امام عادل، متقی اور احکام سے واقف ہونا چاہیے۔</p>
+                    
+                    <h4>نماز باجماعت کے آداب</h4>
+                    <p>مسجد میں حاضری، صف بندی کی رعایت اور امام کی اقتدا اہم آداب میں سے ہیں۔</p>`,
+                    
+                    en: `<h4>Virtue of Congregational Prayer</h4>
+                    <p>Congregational prayer is 27 times better than individual prayer.</p>
+                    
+                    <h4>Imam's Conditions</h4>
+                    <p>The imam should be just, pious, and knowledgeable about rulings.</p>
+                    
+                    <h4>Etiquettes</h4>
+                    <p>Attending mosque, maintaining rows, and following the imam are important etiquettes.</p>`
+                }
+            }
+        ];
+
+        // Continue in next part...
+        // Add remaining 12 articles (4-15)
+        articles.push(
+            {
+                id: 4,
+                category: { fa: "اخلاق", ur: "اخلاقیات", en: "Ethics" },
+                title: {
+                    fa: "صبر و شکیبایی در اسلام",
+                    ur: "اسلام میں صبر اور برداشت",
+                    en: "Patience and Perseverance in Islam"
+                },
+                excerpt: {
+                    fa: "اهمیت صبر و راه‌های تقویت آن در زندگی مسلمان",
+                    ur: "صبر کی اہمیت اور مسلمان کی زندگی میں اسے مضبوط کرنے کے طریقے",
+                    en: "The importance of patience and ways to strengthen it"
+                },
+                content: {
+                    fa: `<h4>مفهوم صبر</h4>
+                    <p>صبر یعنی استقامت در برابر مشکلات و پایبندی به فرامین الهی.</p>
+                    
+                    <h4>انواع صبر</h4>
+                    <p>صبر بر طاعت، صبر بر معصیت، صبر بر مصائب</p>
+                    
+                    <h4>پاداش صابران</h4>
+                    <p>"انما یوفی الصابرون اجرهم بغیر حساب" - صابران بی‌حساب پاداش می‌گیرند.</p>`,
+                    
+                    ur: `<h4>صبر کا مفہوم</h4>
+                    <p>صبر کا مطلب مشکلات کے سامنے ثابت قدمی اور الہی احکام پر پابندی ہے۔</p>
+                    
+                    <h4>صبر کی اقسام</h4>
+                    <p>عبادت پر صبر، گناہ سے صبر، مصیبتوں پر صبر</p>
+                    
+                    <h4>صابرین کا اجر</h4>
+                    <p>"انما یوفی الصابرون اجرھم بغیر حساب" - صبر کرنے والوں کو بے حساب اجر ملے گا۔</p>`,
+                    
+                    en: `<h4>Concept of Patience</h4>
+                    <p>Patience means steadfastness against difficulties and adherence to divine commands.</p>
+                    
+                    <h4>Types of Patience</h4>
+                    <p>Patience in worship, patience from sin, patience in calamities</p>
+                    
+                    <h4>Reward for the Patient</h4>
+                    <p>"Indeed, the patient will be given their reward without account."</p>`
+                }
+            },
+            {
+                id: 5,
+                category: { fa: "عقاید", ur: "عقائد", en: "Beliefs" },
+                title: {
+                    fa: "توحید و انواع آن",
+                    ur: "توحید اور اس کی اقسام",
+                    en: "Monotheism and Its Types"
+                },
+                excerpt: {
+                    fa: "بررسی مفهوم توحید و اقسام آن در اسلام",
+                    ur: "اسلام میں توحید کے مفہوم اور اقسام کا جائزہ",
+                    en: "Exploring the concept and types of monotheism in Islam"
+                },
+                content: {
+                    fa: `<h4>توحید ربوبی</h4>
+                    <p>اعتقاد به یکتایی خداوند در خلقت و تدبیر جهان</p>
+                    
+                    <h4>توحید الوهی</h4>
+                    <p>خداوند تنها معبود حقیقی است و عبادت فقط او را می‌شاید</p>
+                    
+                    <h4>توحید اسما و صفات</h4>
+                    <p>اسماء و صفات الهی مخصوص خداوند است</p>`,
+                    
+                    ur: `<h4>توحید ربوبیت</h4>
+                    <p>خالق اور کائنات کے نظام میں اللہ کی یکتائی کا عقیدہ</p>
+                    
+                    <h4>توحید الوہیت</h4>
+                    <p>اللہ ہی واحد حقیقی معبود ہے اور عبادت صرف اسی کی ہونی چاہیے</p>
+                    
+                    <h4>توحید اسماء و صفات</h4>
+                    <p>الہی نام اور صفات صرف اللہ سے مخصوص ہیں</p>`,
+                    
+                    en: `<h4>Tawhid al-Rububiyyah</h4>
+                    <p>Belief in Allah's uniqueness in creation and management of the universe</p>
+                    
+                    <h4>Tawhid al-Uluhiyyah</h4>
+                    <p>Allah is the only true deity worthy of worship</p>
+                    
+                    <h4>Tawhid al-Asma wa al-Sifat</h4>
+                    <p>Divine names and attributes are exclusive to Allah</p>`
+                }
+            },
+            {
+                id: 6,
+                category: { fa: "سیره", ur: "سیرت", en: "Biography" },
+                title: {
+                    fa: "اخلاق پیامبر اکرم (ص)",
+                    ur: "نبی کریم ﷺ کے اخلاق",
+                    en: "The Prophet's Character"
+                },
+                excerpt: {
+                    fa: "نگاهی به اخلاق والای رسول خدا (ص)",
+                    ur: "رسول اللہ ﷺ کے عالی اخلاق کا جائزہ",
+                    en: "A look at the noble character of Prophet Muhammad"
+                },
+                content: {
+                    fa: `<h4>صداقت و امانت</h4>
+                    <p>پیامبر به "محمد امین" معروف بود</p>
+                    
+                    <h4>رافت و مهربانی</h4>
+                    <p>"و ما ارسلناک الا رحمه للعالمین"</p>
+                    
+                    <h4>عفو و گذشت</h4>
+                    <p>در فتح مکه، دشمنان را بخشید</p>`,
+                    
+                    ur: `<h4>سچائی اور امانت</h4>
+                    <p>نبی کریم "محمد امین" کے نام سے مشہور تھے</p>
+                    
+                    <h4>شفقت اور مہربانی</h4>
+                    <p>"وما ارسلناک الا رحمۃ للعالمین"</p>
+                    
+                    <h4>معافی اور درگزر</h4>
+                    <p>فتح مکہ میں دشمنوں کو معاف کر دیا</p>`,
+                    
+                    en: `<h4>Truthfulness and Trustworthiness</h4>
+                    <p>The Prophet was known as "Muhammad the Trustworthy"</p>
+                    
+                    <h4>Compassion and Mercy</h4>
+                    <p>"We have not sent you except as a mercy to the worlds"</p>
+                    
+                    <h4>Forgiveness and Pardon</h4>
+                    <p>He forgave his enemies at the conquest of Mecca</p>`
+                }
+            },
+            {
+                id: 7,
+                category: { fa: "قرآن کریم", ur: "قرآن کریم", en: "Holy Quran" },
+                title: {
+                    fa: "تفسیر سوره فاتحه",
+                    ur: "سورہ فاتحہ کی تفسیر",
+                    en: "Interpretation of Surah Al-Fatihah"
+                },
+                excerpt: {
+                    fa: "بررسی آیات سوره فاتحه و معانی عمیق آن",
+                    ur: "سورہ فاتحہ کی آیات اور ان کے گہرے معانی کا جائزہ",
+                    en: "Exploring the verses and deep meanings of Surah Al-Fatihah"
+                },
+                content: {
+                    fa: `<h4>اهمیت سوره فاتحه</h4>
+                    <p>این سوره رکن نماز و شفای دل‌هاست</p>
+                    
+                    <h4>"الحمدلله رب العالمین"</h4>
+                    <p>ستایش خداوند پروردگار جهانیان</p>
+                    
+                    <h4>"اهدنا الصراط المستقیم"</h4>
+                    <p>درخواست هدایت به راه راست</p>`,
+                    
+                    ur: `<h4>سورہ فاتحہ کی اہمیت</h4>
+                    <p>یہ سورہ نماز کا رکن اور دلوں کی شفا ہے</p>
+                    
+                    <h4>"الحمدللہ رب العالمین"</h4>
+                    <p>تمام تعریفیں اللہ کے لیے جو جہانوں کا پروردگار ہے</p>
+                    
+                    <h4>"اھدنا الصراط المستقیم"</h4>
+                    <p>ہمیں سیدھے راستے کی ہدایت دے</p>`,
+                    
+                    en: `<h4>Importance of Al-Fatihah</h4>
+                    <p>This chapter is a pillar of prayer and healing for hearts</p>
+                    
+                    <h4>"All praise is due to Allah"</h4>
+                    <p>Praising Allah, Lord of the worlds</p>
+                    
+                    <h4>"Guide us to the straight path"</h4>
+                    <p>Requesting guidance to the right path</p>`
+                }
+            },
+            {
+                id: 8,
+                category: { fa: "حدیث", ur: "حدیث", en: "Hadith" },
+                title: {
+                    fa: "اهمیت علم در احادیث",
+                    ur: "احادیث میں علم کی اہمیت",
+                    en: "Importance of Knowledge in Hadith"
+                },
+                excerpt: {
+                    fa: "جایگاه علم و دانش در سخنان پیامبر (ص)",
+                    ur: "نبی کریم ﷺ کے اقوال میں علم و دانش کا مقام",
+                    en: "The status of knowledge in prophetic sayings"
+                },
+                content: {
+                    fa: `<h4>طلب علم فریضه است</h4>
+                    <p>"طلب العلم فریضه علی کل مسلم و مسلمه"</p>
+                    
+                    <h4>فضیلت عالم</h4>
+                    <p>برتری عالم بر عابد چون برتری ماه بر ستارگان</p>
+                    
+                    <h4>علم میراث انبیا</h4>
+                    <p>علما وارثان پیامبران هستند</p>`,
+                    
+                    ur: `<h4>علم حاصل کرنا فرض ہے</h4>
+                    <p>"طلب العلم فریضۃ علی کل مسلم و مسلمۃ"</p>
+                    
+                    <h4>عالم کی فضیلت</h4>
+                    <p>عالم کی عابد پر برتری ایسی ہے جیسے چاند کی ستاروں پر</p>
+                    
+                    <h4>علم انبیا کی میراث</h4>
+                    <p>علماء انبیا کے وارث ہیں</p>`,
+                    
+                    en: `<h4>Seeking Knowledge is Obligatory</h4>
+                    <p>"Seeking knowledge is obligatory upon every Muslim"</p>
+                    
+                    <h4>Virtue of the Scholar</h4>
+                    <p>The superiority of a scholar over a worshipper is like the moon over stars</p>
+                    
+                    <h4>Knowledge is Prophets' Legacy</h4>
+                    <p>Scholars are the heirs of the prophets</p>`
+                }
+            },
+            {
+                id: 9,
+                category: { fa: "فقه", ur: "فقہ", en: "Jurisprudence" },
+                title: {
+                    fa: "احکام زکات",
+                    ur: "زکوۃ کے احکام",
+                    en: "Rules of Zakat"
+                },
+                excerpt: {
+                    fa: "شرایط و احکام پرداخت زکات در اسلام",
+                    ur: "اسلام میں زکوۃ کی ادائیگی کی شرائط اور احکام",
+                    en: "Conditions and rulings of paying Zakat in Islam"
+                },
+                content: {
+                    fa: `<h4>تعریف زکات</h4>
+                    <p>زکات یکی از ارکان اسلام و حق فقرا در مال اغنیاست</p>
+                    
+                    <h4>شرایط وجوب</h4>
+                    <p>بلوغ نصاب، گذشت یک سال، مالکیت تام</p>
+                    
+                    <h4>مصارف زکات</h4>
+                    <p>هشت گروه ذکر شده در قرآن</p>`,
+                    
+                    ur: `<h4>زکوۃ کی تعریف</h4>
+                    <p>زکوۃ اسلام کا رکن اور اغنیاء کے مال میں فقراء کا حق ہے</p>
+                    
+                    <h4>وجوب کی شرائط</h4>
+                    <p>نصاب تک پہنچنا، ایک سال گزرنا، مکمل ملکیت</p>
+                    
+                    <h4>زکوۃ کے مصارف</h4>
+                    <p>قرآن میں ذکر کردہ آٹھ گروہ</p>`,
+                    
+                    en: `<h4>Definition of Zakat</h4>
+                    <p>Zakat is a pillar of Islam and the right of the poor in the wealth of the rich</p>
+                    
+                    <h4>Conditions of Obligation</h4>
+                    <p>Reaching nisab, passing of one year, complete ownership</p>
+                    
+                    <h4>Recipients of Zakat</h4>
+                    <p>Eight categories mentioned in the Quran</p>`
+                }
+            },
+            {
+                id: 10,
+                category: { fa: "اخلاق", ur: "اخلاقیات", en: "Ethics" },
+                title: {
+                    fa: "حسن ظن به خدا",
+                    ur: "اللہ پر حسن ظن",
+                    en: "Good Opinion of Allah"
+                },
+                excerpt: {
+                    fa: "اهمیت داشتن حسن ظن نسبت به خداوند",
+                    ur: "اللہ کے بارے میں اچھا گمان رکھنے کی اہمیت",
+                    en: "The importance of having good thoughts about Allah"
+                },
+                content: {
+                    fa: `<h4>حدیث قدسی</h4>
+                    <p>"انا عند ظن عبدی بی" - من در حد گمان بنده‌ام نزد او هستم</p>
+                    
+                    <h4>اثرات حسن ظن</h4>
+                    <p>آرامش، امید، تلاش بیشتر</p>
+                    
+                    <h4>نمونه‌ها</h4>
+                    <p>حضرت یعقوب و امید به بازگشت یوسف</p>`,
+                    
+                    ur: `<h4>حدیث قدسی</h4>
+                    <p>"انا عند ظن عبدی بی" - میں اپنے بندے کے گمان کے مطابق ہوں</p>
+                    
+                    <h4>حسن ظن کے اثرات</h4>
+                    <p>سکون، امید، زیادہ کوشش</p>
+                    
+                    <h4>مثالیں</h4>
+                    <p>حضرت یعقوب کی یوسف کی واپسی کی امید</p>`,
+                    
+                    en: `<h4>Sacred Hadith</h4>
+                    <p>"I am as My servant thinks I am"</p>
+                    
+                    <h4>Effects of Good Opinion</h4>
+                    <p>Peace, hope, greater effort</p>
+                    
+                    <h4>Examples</h4>
+                    <p>Prophet Jacob's hope for Joseph's return</p>`
+                }
+            },
+            {
+                id: 11,
+                category: { fa: "عقاید", ur: "عقائد", en: "Beliefs" },
+                title: {
+                    fa: "ایمان به روز قیامت",
+                    ur: "قیامت کے دن پر ایمان",
+                    en: "Belief in the Day of Judgment"
+                },
+                excerpt: {
+                    fa: "بررسی عقیده به معاد و اهمیت آن",
+                    ur: "آخرت کے عقیدے اور اس کی اہمیت کا جائزہ",
+                    en: "Exploring the belief in resurrection and its importance"
+                },
+                content: {
+                    fa: `<h4>ضرورت معاد</h4>
+                    <p>عدالت الهی ایجاب می‌کند که حساب و کتابی باشد</p>
+                    
+                    <h4>مراحل قیامت</h4>
+                    <p>مرگ، قبر، محشر، حساب، میزان، صراط</p>
+                    
+                    <h4>تاثیر بر رفتار</h4>
+                    <p>ایمان به قیامت انسان را از گناه باز می‌دارد</p>`,
+                    
+                    ur: `<h4>معاد کی ضرورت</h4>
+                    <p>الہی عدل کا تقاضا ہے کہ حساب کتاب ہو</p>
+                    
+                    <h4>قیامت کے مراحل</h4>
+                    <p>موت، قبر، حشر، حساب، میزان، پل صراط</p>
+                    
+                    <h4>رویے پر اثر</h4>
+                    <p>قیامت پر ایمان انسان کو گناہ سے روکتا ہے</p>`,
+                    
+                    en: `<h4>Necessity of Resurrection</h4>
+                    <p>Divine justice requires an accounting</p>
+                    
+                    <h4>Stages of Judgment Day</h4>
+                    <p>Death, grave, gathering, reckoning, scale, bridge</p>
+                    
+                    <h4>Impact on Behavior</h4>
+                    <p>Belief in judgment prevents sin</p>`
+                }
+            },
+            {
+                id: 12,
+                category: { fa: "سیره", ur: "سیرت", en: "Biography" },
+                title: {
+                    fa: "هجرت پیامبر به مدینه",
+                    ur: "نبی کریم کی مدینہ ہجرت",
+                    en: "The Prophet's Migration to Medina"
+                },
+                excerpt: {
+                    fa: "داستان هجرت و اهمیت آن در تاریخ اسلام",
+                    ur: "ہجرت کی داستان اور اسلامی تاریخ میں اس کی اہمیت",
+                    en: "The story of migration and its significance in Islamic history"
+                },
+                content: {
+                    fa: `<h4>علل هجرت</h4>
+                    <p>فشار مشرکین مکه و فراهم شدن زمینه در مدینه</p>
+                    
+                    <h4>اتفاقات سفر</h4>
+                    <p>غار ثور، سراقه بن مالک، ورود به مدینه</p>
+                    
+                    <h4>نتایج هجرت</h4>
+                    <p>تاسیس دولت اسلامی، گسترش اسلام</p>`,
+                    
+                    ur: `<h4>ہجرت کی وجوہات</h4>
+                    <p>مکہ میں مشرکین کا دباؤ اور مدینہ میں زمین کی تیاری</p>
+                    
+                    <h4>سفر کے واقعات</h4>
+                    <p>غار ثور، سراقہ بن مالک، مدینہ میں داخلہ</p>
+                    
+                    <h4>ہجرت کے نتائج</h4>
+                    <p>اسلامی ریاست کی بنیاد، اسلام کی توسیع</p>`,
+                    
+                    en: `<h4>Reasons for Migration</h4>
+                    <p>Persecution in Mecca and readiness in Medina</p>
+                    
+                    <h4>Journey Events</h4>
+                    <p>Cave of Thawr, Suraqah ibn Malik, arrival in Medina</p>
+                    
+                    <h4>Results of Migration</h4>
+                    <p>Establishment of Islamic state, spread of Islam</p>`
+                }
+            },
+            {
+                id: 13,
+                category: { fa: "قرآن کریم", ur: "قرآن کریم", en: "Holy Quran" },
+                title: {
+                    fa: "اعجاز ادبی قرآن",
+                    ur: "قرآن کا ادبی اعجاز",
+                    en: "Literary Miracles of Quran"
+                },
+                excerpt: {
+                    fa: "بررسی زیبایی‌های ادبی و بلاغی قرآن کریم",
+                    ur: "قرآن کریم کی ادبی اور بلاغی خوبصورتیوں کا جائزہ",
+                    en: "Examining the literary and rhetorical beauty of the Quran"
+                },
+                content: {
+                    fa: `<h4>فصاحت و بلاغت</h4>
+                    <p>قرآن بالاترین مرتبه بلاغت عربی است</p>
+                    
+                    <h4>نظم منحصر به فرد</h4>
+                    <p>ترکیب شعر و نثر به شکلی بی‌نظیر</p>
+                    
+                    <h4>چالش قرآن</h4>
+                    <p>"فأتوا بسوره من مثله" - سوره‌ای همانند بیاورید</p>`,
+                    
+                    ur: `<h4>فصاحت و بلاغت</h4>
+                    <p>قرآن عربی بلاغت کا بلند ترین مقام ہے</p>
+                    
+                    <h4>منفرد نظم</h4>
+                    <p>شعر اور نثر کا بے مثال امتزاج</p>
+                    
+                    <h4>قرآن کا چیلنج</h4>
+                    <p>"فأتوا بسورۃ من مثلہ" - اس جیسی ایک سورت لاؤ</p>`,
+                    
+                    en: `<h4>Eloquence and Rhetoric</h4>
+                    <p>The Quran is the highest level of Arabic eloquence</p>
+                    
+                    <h4>Unique Composition</h4>
+                    <p>Unprecedented combination of poetry and prose</p>
+                    
+                    <h4>Quranic Challenge</h4>
+                    <p>"Bring a chapter like it"</p>`
+                }
+            },
+            {
+                id: 14,
+                category: { fa: "فقه", ur: "فقہ", en: "Jurisprudence" },
+                title: {
+                    fa: "احکام روزه",
+                    ur: "روزے کے احکام",
+                    en: "Rules of Fasting"
+                },
+                excerpt: {
+                    fa: "شرایط و مبطلات روزه در ماه رمضان",
+                    ur: "ماہ رمضان میں روزے کی شرائط اور مفسدات",
+                    en: "Conditions and invalidators of fasting in Ramadan"
+                },
+                content: {
+                    fa: `<h4>وجوب روزه</h4>
+                    <p>روزه ماه رمضان بر هر مسلمان بالغ واجب است</p>
+                    
+                    <h4>مبطلات</h4>
+                    <p>خوردن، آشامیدن، جماع، استمناء، دروغ به خدا و پیامبر</p>
+                    
+                    <h4>فواید روزه</h4>
+                    <p>تقوا، بهداشت، همدردی با فقرا</p>`,
+                    
+                    ur: `<h4>روزے کی فرضیت</h4>
+                    <p>رمضان کا روزہ ہر بالغ مسلمان پر فرض ہے</p>
+                    
+                    <h4>مفسدات</h4>
+                    <p>کھانا، پینا، جماع، استمناء، خدا اور رسول پر جھوٹ</p>
+                    
+                    <h4>روزے کے فوائد</h4>
+                    <p>تقویٰ، صحت، غریبوں سے ہمدردی</p>`,
+                    
+                    en: `<h4>Obligation of Fasting</h4>
+                    <p>Fasting in Ramadan is obligatory on every adult Muslim</p>
+                    
+                    <h4>Invalidators</h4>
+                    <p>Eating, drinking, intercourse, masturbation, lying about God and Prophet</p>
+                    
+                    <h4>Benefits of Fasting</h4>
+                    <p>Piety, health, empathy with the poor</p>`
+                }
+            },
+            {
+                id: 15,
+                category: { fa: "اخلاق", ur: "اخلاقیات", en: "Ethics" },
+                title: {
+                    fa: "توکل بر خداوند",
+                    ur: "اللہ پر بھروسہ",
+                    en: "Trust in Allah"
+                },
+                excerpt: {
+                    fa: "معنا و مراتب توکل و تفاوت آن با تواکل",
+                    ur: "توکل کے معنی، مراتب اور تواکل سے فرق",
+                    en: "Meaning and levels of trust, difference from passivity"
+                },
+                content: {
+                    fa: `<h4>تعریف توکل</h4>
+                    <p>اعتماد به خدا همراه با انجام تلاش</p>
+                    
+                    <h4>تفاوت با تواکل</h4>
+                    <p>تواکل رها کردن کار است، توکل همراه با تلاش</p>
+                    
+                    <h4>ثمرات توکل</h4>
+                    <p>آرامش قلب، موفقیت، رضای الهی</p>`,
+                    
+                    ur: `<h4>توکل کی تعریف</h4>
+                    <p>کوشش کے ساتھ اللہ پر بھروسہ</p>
+                    
+                    <h4>تواکل سے فرق</h4>
+                    <p>تواکل کام چھوڑ دینا ہے، توکل کوشش کے ساتھ ہے</p>
+                    
+                    <h4>توکل کے ثمرات</h4>
+                    <p>قلبی سکون، کامیابی، الہی رضا</p>`,
+                    
+                    en: `<h4>Definition of Trust</h4>
+                    <p>Reliance on Allah with effort</p>
+                    
+                    <h4>Difference from Passivity</h4>
+                    <p>Passivity is abandoning work, trust is with effort</p>
+                    
+                    <h4>Fruits of Trust</h4>
+                    <p>Peace of heart, success, divine pleasure</p>`
+                }
+            }
+        );
+
+        // Current language
+        let currentLang = 'fa';
+        document.documentElement.dir = 'rtl';
+
+        // Update page text
+        function updateLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+            
+            Object.keys(translations[lang]).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            renderArticles();
+        }
+
+        // Render articles
+        function renderArticles(containerId = 'featuredArticles', limit = 6) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const articlesToShow = limit ? articles.slice(0, limit) : articles;
+            
+            container.innerHTML = articlesToShow.map(article => `
+                <div class="article-card" data-id="${article.id}">
+                    <span class="article-category">${article.category[currentLang]}</span>
+                    <h3>${article.title[currentLang]}</h3>
+                    <p>${article.excerpt[currentLang]}</p>
+                    <button class="read-more" data-id="${article.id}">
+                        ${translations[currentLang].readMore}
+                    </button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('.read-more').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const articleId = parseInt(e.target.dataset.id);
+                    showArticleModal(articleId);
+                });
+            });
+        }
+
+        // Show article modal
+        function showArticleModal(id) {
+            const article = articles.find(a => a.id === id);
+            if (!article) return;
+
+            document.getElementById('modalTitle').textContent = article.title[currentLang];
+            document.getElementById('modalCategory').textContent = article.category[currentLang];
+            document.getElementById('modalBody').innerHTML = article.content[currentLang];
+            document.getElementById('articleModal').classList.add('active');
+        }
+
+        // Render categories
+        function renderCategories() {
+            const container = document.getElementById('categoriesGrid');
+            if (!container) return;
+
+            const categories = {};
+            articles.forEach(article => {
+                const cat = article.category[currentLang];
+                categories[cat] = (categories[cat] || 0) + 1;
+            });
+
+            container.innerHTML = Object.entries(categories).map(([cat, count]) => `
+                <div class="category-card">
+                    <h3>${cat}</h3>
+                    <p>${count} ${currentLang === 'fa' ? 'مقاله' : currentLang === 'ur' ? 'مضامین' : 'articles'}</p>
+                </div>
+            `).join('');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                updateLanguage(e.target.dataset.lang);
+            });
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.dataset.page;
+                
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(page).classList.add('active');
+                
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+
+                if (page === 'articles') {
+                    renderArticles('allArticles', null);
+                } else if (page === 'categories') {
+                    renderCategories();
+                }
+            });
+        });
+
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            document.getElementById('articleModal').classList.remove('active');
+        });
+
+        document.getElementById('articleModal').addEventListener('click', (e) => {
+            if (e.target.id === 'articleModal') {
+                document.getElementById('articleModal').classList.remove('active');
+            }
+        });
+
+        // Initialize
+        updateLanguage('ur');
+    </script>
+</body>
+</html>
