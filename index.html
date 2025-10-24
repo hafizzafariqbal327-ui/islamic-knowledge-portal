@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المصباح - مرکز فکری اسلامی قم</title>
-    <meta name="description" content="مرکز فکری اسلامی المصباح - تعلیم قرآن، احکام، عقائد، اخلاق و فقہ">
-    <meta name="keywords" content="اسلام، قرآن، احکام، عقائد، فقہ، قم">
+    <meta name="description" content="مرکز فکری اسلامی المصباح - آموزش علوم اسلامی، فقه، عقاید، اخلاق و علوم انسانی">
+    <meta name="keywords" content="اسلام، فقه، عقاید، اخلاق، قم، حوزه علمیه">
+    
+    <!-- Google Fonts for Urdu/Farsi/English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         /* ==================== RESET & VARIABLES ==================== */
@@ -14,117 +19,117 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         :root {
-            --primary-green: #1a472a;
+            --primary-green: #1a4d2e;
             --secondary-green: #2d5f3f;
-            --gold: #ffd700;
-            --light-gold: #fff4cc;
-            --dark-gold: #b8960a;
-            --white: #ffffff;
-            --light-gray: #f5f5f5;
-            --text-dark: #333;
-            --text-light: #666;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4c1;
+            --text-light: #ffffff;
+            --text-dark: #1a1a1a;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
         }
-
+        
         body {
-            font-family: 'Tahoma', 'Arial', sans-serif;
-            line-height: 1.8;
-            color: var(--text-dark);
-            background: var(--light-gray);
+            font-family: 'Vazirmatn', 'Noto Nastaliq Urdu', 'Amiri', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+        
+        [lang="en"] {
+            font-family: 'Roboto', sans-serif;
+            direction: ltr;
+        }
+        
+        [lang="ur"] {
+            font-family: 'Noto Nastaliq Urdu', 'Amiri', serif;
+            direction: rtl;
+        }
+        
+        [lang="fa"] {
+            font-family: 'Vazirmatn', 'Amiri', sans-serif;
             direction: rtl;
         }
 
-        body.ltr {
-            direction: ltr;
-            font-family: 'Arial', 'Helvetica', sans-serif;
-        }
-
-        /* ==================== LANGUAGE CONTENT ==================== */
-        [data-lang] {
-            display: none;
-        }
-
-        [data-lang].active {
-            display: block;
-        }
-
-        /* ==================== HEADER & NAVIGATION ==================== */
-        header {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
-            color: var(--white);
-            padding: 0;
-            position: sticky;
+        /* ==================== LOADING SCREEN ==================== */
+        .loading-screen {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-
-        .top-bar {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .top-bar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==================== HEADER ==================== */
+        .top-contact {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .contact-info {
-            display: flex;
             gap: 20px;
-            flex-wrap: wrap;
-            font-size: 0.9rem;
         }
 
-        .contact-info a {
-            color: var(--gold);
+        .contact-links a {
+            color: var(--light-gold);
             text-decoration: none;
-            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
-        .contact-info a:hover {
-            color: var(--white);
+        .contact-links a:hover {
+            color: var(--accent-gold);
             transform: translateY(-2px);
         }
 
-        .language-switcher {
-            display: flex;
-            gap: 10px;
+        header {
+            background: rgba(255,255,255,0.95);
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        .lang-btn {
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
-
-        .lang-btn:hover,
-        .lang-btn.active {
-            background: var(--gold);
-            color: var(--primary-green);
-            transform: translateY(-2px);
-        }
-
-        .main-header {
+        .header-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -132,6 +137,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 20px;
         }
 
         .logo-section {
@@ -141,425 +147,474 @@
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            background: var(--white);
-            border-radius: 50%;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .logo svg {
-            width: 100%;
-            height: 100%;
+            width: 60px;
+            height: 60px;
         }
 
         .site-title h1 {
-            font-size: 2rem;
-            color: var(--gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 5px;
         }
 
         .site-title p {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--secondary-green);
+            font-size: 0.9rem;
         }
 
-        nav ul {
-            list-style: none;
+        .lang-switcher {
             display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: var(--transition);
+        .lang-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--primary-green);
+            background: white;
+            color: var(--primary-green);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            background: var(--primary-green);
+            padding: 15px 0;
+        }
+
+        .nav-menu {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
             font-size: 1rem;
         }
 
-        nav a:hover {
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--gold);
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--accent-gold);
             transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
-        .menu-toggle {
+        /* ==================== MAIN CONTAINER ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
             display: none;
-            background: var(--gold);
-            color: var(--primary-green);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ==================== HERO SECTION ==================== */
         .hero {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 50%, #1a472a 100%);
-            color: var(--white);
-            padding: 80px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="80" opacity="0.05">☪</text></svg>') repeat;
-            animation: slide 20s linear infinite;
-        }
-
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100px); }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 60px 20px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 40px;
         }
 
         .hero h2 {
-            font-size: 3rem;
+            color: var(--primary-green);
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            color: var(--gold);
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            animation: fadeInDown 1s ease;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            line-height: 2;
-            animation: fadeInUp 1s ease 0.3s both;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .btn {
+        .cta-button {
+            display: inline-block;
             padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition);
+            background: var(--accent-gold);
+            color: white;
             text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--primary-green);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .btn-primary:hover {
-            background: var(--dark-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-        }
-
-        .btn-secondary:hover {
-            background: var(--gold);
-            color: var(--primary-green);
-            transform: translateY(-3px);
-        }
-
-        /* ==================== SECTIONS ==================== */
-        .section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-
-        .section-header p {
+            border-radius: 30px;
+            font-weight: 600;
             font-size: 1.1rem;
-            color: var(--text-light);
-            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
         }
 
-        /* ==================== CARDS GRID ==================== */
-        .cards-grid {
+        .cta-button:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ==================== TOPICS GRID ==================== */
+        .topics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        .card {
-            background: var(--white);
+        .topic-card {
+            background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 5px 20px var(--shadow);
-            transition: var(--transition);
-            border: 2px solid transparent;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--accent-gold);
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-color: var(--gold);
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .card-icon {
+        .topic-icon {
             font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-            animation: pulse 2s infinite;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            color: var(--primary-green);
             margin-bottom: 15px;
         }
 
-        .card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 20px;
+        .topic-card h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .card-link {
-            color: var(--gold);
+        .topic-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* ==================== ARTICLES SECTION ==================== */
+        .articles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 20px;
+        }
+
+        .article-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+
+        .article-body {
+            padding: 20px;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
             text-decoration: none;
-            font-weight: bold;
-            display: inline-flex;
+            display: inline-block;
+        }
+
+        .btn-read {
+            background: var(--accent-gold);
+            color: white;
+        }
+
+        .btn-listen {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-download {
+            background: var(--secondary-green);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ==================== COURSES SECTION ==================== */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-content h3 {
+            color: var(--primary-green);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .course-info {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .course-details {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            display: flex;
             align-items: center;
             gap: 5px;
-            transition: var(--transition);
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        .card-link:hover {
-            color: var(--primary-green);
-            gap: 10px;
-        }
-
-        /* ==================== TOPICS SECTION ==================== */
-        .topics-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .topic-item {
-            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-            color: var(--white);
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .topic-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px var(--shadow);
-        }
-
-        .topic-item span {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .topic-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        /* ==================== ABOUT SECTION ==================== */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            color: var(--primary-green);
-            margin-bottom: 20px;
-        }
-
-        .about-text p {
-            margin-bottom: 15px;
-            line-height: 2;
-        }
-
-        .about-image {
-            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-
-        .about-image svg {
+        .enroll-btn {
             width: 100%;
-            max-width: 300px;
-            height: auto;
+            padding: 12px;
+            background: var(--accent-gold);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .enroll-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
         }
 
         /* ==================== BOOKS SECTION ==================== */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .book-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
             text-align: center;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: var(--transition);
         }
 
         .book-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .book-cover {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
+        .book-icon {
             font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
         }
 
-        .book-title {
-            font-size: 1.1rem;
+        .book-card h3 {
             color: var(--primary-green);
+            font-size: 1.3rem;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .book-author {
-            font-size: 0.9rem;
-            color: var(--text-light);
+            color: #666;
+            font-size: 1rem;
             margin-bottom: 15px;
         }
 
+        .book-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
         .download-btn {
-            background: var(--gold);
-            color: var(--primary-green);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: var(--transition);
             width: 100%;
+            padding: 12px;
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .download-btn:hover {
-            background: var(--dark-gold);
+            background: var(--accent-gold);
             transform: translateY(-2px);
         }
 
-        /* ==================== CONTACT FORM ==================== */
+        /* ==================== CONTACT SECTION ==================== */
         .contact-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .contact-form {
-            background: var(--white);
-            padding: 40px;
+            background: white;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
             color: var(--primary-green);
-            font-weight: bold;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             font-family: inherit;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--gold);
+            border-color: var(--accent-gold);
         }
 
         .form-group textarea {
@@ -567,56 +622,79 @@
             min-height: 120px;
         }
 
-        .contact-info-box {
-            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-            color: var(--white);
-            padding: 40px;
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-gold);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .contact-info-card {
+            background: white;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
+            box-shadow: var(--shadow);
         }
 
-        .contact-info-box h3 {
-            color: var(--gold);
-            margin-bottom: 30px;
-            font-size: 1.8rem;
+        .contact-info-card h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
-        .contact-item-detail {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f8f8f8;
             border-radius: 10px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
-        .contact-item-detail:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(-5px);
+        .info-item:hover {
+            background: var(--light-gold);
         }
 
-        .contact-item-detail span {
-            font-size: 1.8rem;
-            display: block;
-            margin-bottom: 10px;
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
         }
 
-        .contact-item-detail p {
-            color: var(--gold);
-            font-weight: bold;
-            margin-bottom: 5px;
+        .info-text {
+            color: #333;
+            font-size: 1rem;
         }
 
-        .contact-item-detail a {
-            color: var(--white);
+        .info-text a {
+            color: var(--primary-green);
             text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-text a:hover {
+            color: var(--accent-gold);
         }
 
         /* ==================== FOOTER ==================== */
         footer {
-            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-            color: var(--white);
-            padding: 60px 20px 20px;
-            margin-top: 80px;
+            background: var(--primary-green);
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 60px;
         }
 
         .footer-content {
@@ -624,831 +702,448 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .footer-section h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+        .footer-section h4 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
             margin-bottom: 10px;
         }
 
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
         .footer-section a:hover {
-            color: var(--gold);
-            padding-right: 5px;
+            color: var(--accent-gold);
         }
 
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        .social-links a {
+        .social-btn {
             width: 40px;
             height: 40px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid var(--gold);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .social-links a:hover {
-            background: var(--gold);
-            color: var(--primary-green);
+        .social-btn:hover {
+            background: var(--accent-gold);
             transform: translateY(-3px);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
         }
-
-        /* ==================== ANIMATIONS ==================== */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        /* ==================== BACK TO TOP ==================== */
-        .back-to-top {
+        
+        /* ==================== SCROLL TO TOP ==================== */
+        .scroll-top {
             position: fixed;
             bottom: 30px;
             left: 30px;
-            background: var(--gold);
-            color: var(--primary-green);
             width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: var(--transition);
-            z-index: 999;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-        }
-
-        .back-to-top.show {
-            display: flex;
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 768px) {
-            .main-header {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-                display: none;
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .top-bar-content {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-        }
-
-        /* ==================== LOADING ANIMATION ==================== */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 215, 0, 0.3);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">↑</div>
-
-    <!-- Header -->
-    <header>
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="top-bar-content">
-                <div class="contact-info">
-                    <a href="tel:+989024064467">📞 +989024064467</a>
-                    <a href="tel:+989918126499">📞 +989918126499</a>
-                    <a href="mailto:hafizzafariqbal327@gmail.com">📧 hafizzafariqbal327@gmail.com</a>
-                    <a href="https://wa.me/989024064467" target="_blank">💬 WhatsApp</a>
-                    <a href="https://eitaa.com/Zafar1" target="_blank">📱 Eitaa</a>
-                </div>
-                <div class="language-switcher">
-                    <button class="lang-btn active" onclick="switchLanguage('fa')">فارسی</button>
-                    <button class="lang-btn" onclick="switchLanguage('ur')">اردو</button>
-                    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Header -->
-        <div class="main-header">
-            <div class="logo-section">
-                <div class="logo">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" fill="#1a472a"/>
-                        <path d="M50 20 L65 40 L55 40 L55 70 L45 70 L45 40 L35 40 Z" fill="#ffd700"/>
-                        <circle cx="50" cy="75" r="5" fill="#ffd700"/>
-                        <text x="50" y="35" text-anchor="middle" font-size="20" fill="#ffd700">📚</text>
-                    </svg>
-                </div>
-                <div class="site-title">
-                    <h1 data-lang="fa" class="active">المصباح</h1>
-                    <h1 data-lang="ur">المصباح</h1>
-                    <h1 data-lang="en">Al-Misbah</h1>
-                    
-                    <p data-lang="fa" class="active">مرکز فکری اسلامی قم</p>
-                    <p data-lang="ur">اسلامی فکری مرکز قم</p>
-                    <p data-lang="en">Islamic Knowledge Center - Qom</p>
-                </div>
+            heigh        <!-- Courses Section -->
+        <section id="courses" class="section">
+            <div class="hero">
+                <h2 class="translatable" data-fa="دوره‌های آموزشی" data-ur="تعلیمی کورسز" data-en="Educational Courses">دوره‌های آموزشی</h2>
+                <p class="translatable" data-fa="دوره‌های جامع و تخصصی در حوزه‌های مختلف علوم اسلامی با اساتید مجرب" data-ur="تجربہ کار اساتذہ کے ساتھ اسلامی علوم کے مختلف شعبوں میں جامع اور خصوصی کورسز" data-en="Comprehensive and specialized courses in various fields of Islamic sciences with experienced instructors">دوره‌های جامع و تخصصی در حوزه‌های مختلف علوم اسلامی با اساتید مجرب</p>
             </div>
 
-            <button class="menu-toggle" onclick="toggleMenu()">☰ منو</button>
-
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#home" data-lang="fa" class="active">صفحه اصلی</a>
-                        <a href="#home" data-lang="ur">ہوم</a>
-                        <a href="#home" data-lang="en">Home</a></li>
-                    
-                    <li><a href="#topics" data-lang="fa" class="active">موضوعات</a>
-                        <a href="#topics" data-lang="ur">موضوعات</a>
-                        <a href="#topics" data-lang="en">Topics</a></li>
-                    
-                    <li><a href="#books" data-lang="fa" class="active">کتب اسلامی</a>
-                        <a href="#books" data-lang="ur">اسلامی کتب</a>
-                        <a href="#books" data-lang="en">Islamic Books</a></li>
-                    
-                    <li><a href="#about" data-lang="fa" class="active">درباره ما</a>
-                        <a href="#about" data-lang="ur">ہمارے بارے میں</a>
-                        <a href="#about" data-lang="en">About Us</a></li>
-                    
-                    <li><a href="#contact" data-lang="fa" class="active">تماس با ما</a>
-                        <a href="#contact" data-lang="ur">رابطہ</a>
-                        <a href="#contact" data-lang="en">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h2 data-lang="fa" class="active">به المصباح خوش آمدید</h2>
-            <h2 data-lang="ur">المصباح میں خوش آمدید</h2>
-            <h2 data-lang="en">Welcome to Al-Misbah</h2>
-
-            <p data-lang="fa" class="active">
-                مرکز فکری اسلامی قم - آموزش احکام، عقاید، اخلاق و فقه اسلامی
-                <br>با راهنمایی استاد ظفر اقبال مظفری
-            </p>
-            <p data-lang="ur">
-                اسلامی فکری مرکز قم - احکام، عقائد، اخلاق اور فقہ کی تعلیم
-                <br>استاد ظفر اقبال مظفری کی رہنمائی میں
-            </p>
-            <p data-lang="en">
-                Islamic Knowledge Center Qom - Teaching Islamic Rules, Beliefs, Ethics & Jurisprudence
-                <br>Under the guidance of Ustad Zafar Iqbal Muzaffari
-            </p>
-
-            <div class="cta-buttons">
-                <a href="#topics" class="btn btn-primary" data-lang="fa">شروع به یادگیری</a>
-                <a href="#topics" class="btn btn-primary" data-lang="ur">سیکھنا شروع کریں</a>
-                <a href="#topics" class="btn btn-primary" data-lang="en">Start Learning</a>
-
-                <a href="#contact" class="btn btn-secondary" data-lang="fa">تماس با ما</a>
-                <a href="#contact" class="btn btn-secondary" data-lang="ur">رابطہ کریں</a>
-                <a href="#contact" class="btn btn-secondary" data-lang="en">Contact Us</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Topics Section -->
-    <section class="section" id="topics">
-        <div class="section-header">
-            <h2 data-lang="fa" class="active">موضوعات آموزشی</h2>
-            <h2 data-lang="ur">تعلیمی موضوعات</h2>
-            <h2 data-lang="en">Educational Topics</h2>
-
-            <p data-lang="fa" class="active">دانش اسلامی را در زمینه‌های مختلف فرا بگیرید</p>
-            <p data-lang="ur">مختلف شعبوں میں اسلامی علم حاصل کریں</p>
-            <p data-lang="en">Learn Islamic knowledge in various fields</p>
-        </div>
-
-        <div class="topics-list">
-            <!-- Topic 1: Ahkam -->
-            <div class="topic-item">
-                <span>📖</span>
-                <h4 data-lang="fa" class="active">احکام</h4>
-                <h4 data-lang="ur">احکام</h4>
-                <h4 data-lang="en">Islamic Rules</h4>
-                <p data-lang="fa" class="active">احکام عبادی و معاملات</p>
-                <p data-lang="ur">عبادات اور معاملات کے احکام</p>
-                <p data-lang="en">Worship & Transaction Rules</p>
-            </div>
-
-            <!-- Topic 2: Aqaid -->
-            <div class="topic-item">
-                <span>🕌</span>
-                <h4 data-lang="fa" class="active">عقاید</h4>
-                <h4 data-lang="ur">عقائد</h4>
-                <h4 data-lang="en">Islamic Beliefs</h4>
-                <p data-lang="fa" class="active">اصول اعتقادات اسلامی</p>
-                <p data-lang="ur">اسلامی عقائد کے اصول</p>
-                <p data-lang="en">Principles of Islamic Faith</p>
-            </div>
-
-            <!-- Topic 3: Akhlaq -->
-            <div class="topic-item">
-                <span>💎</span>
-                <h4 data-lang="fa" class="active">اخلاق</h4>
-                <h4 data-lang="ur">اخلاق</h4>
-                <h4 data-lang="en">Ethics</h4>
-                <p data-lang="fa" class="active">تهذیب نفس و اخلاق اسلامی</p>
-                <p data-lang="ur">نفس کی تربیت اور اسلامی اخلاق</p>
-                <p data-lang="en">Self-purification & Islamic Ethics</p>
-            </div>
-
-            <!-- Topic 4: Fiqh -->
-            <div class="topic-item">
-                <span>⚖️</span>
-                <h4 data-lang="fa" class="active">فقه</h4>
-                <h4 data-lang="ur">فقہ</h4>
-                <h4 data-lang="en">Jurisprudence</h4>
-                <p data-lang="fa" class="active">فقه اسلامی و استنباط احکام</p>
-                <p data-lang="ur">اسلامی فقہ اور احکام کا استنباط</p>
-                <p data-lang="en">Islamic Jurisprudence & Deduction</p>
-            </div>
-
-            <!-- Topic 5: Human Sciences -->
-            <div class="topic-item">
-                <span>🌍</span>
-                <h4 data-lang="fa" class="active">علوم انسانی</h4>
-                <h4 data-lang="ur">انسانی علوم</h4>
-                <h4 data-lang="en">Human Sciences</h4>
-                <p data-lang="fa" class="active">علوم انسانی از دیدگاه اسلام</p>
-                <p data-lang="ur">اسلامی نقطہ نظر سے انسانی علوم</p>
-                <p data-lang="en">Human Sciences from Islamic View</p>
-            </div>
-
-            <!-- Topic 6: Shubhat -->
-            <div class="topic-item">
-                <span>❓</span>
-                <h4 data-lang="fa" class="active">پاسخ به شبهات</h4>
-                <h4 data-lang="ur">شبہات کے جوابات</h4>
-                <h4 data-lang="en">Answering Doubts</h4>
-                <p data-lang="fa" class="active">پاسخ به شبهات دینی</p>
-                <p data-lang="ur">دینی شبہات کے جوابات</p>
-                <p data-lang="en">Responses to Religious Doubts</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Books Section -->
-    <section class="section" id="books">
-        <div class="section-header">
-            <h2 data-lang="fa" class="active">کتابخانه اسلامی</h2>
-            <h2 data-lang="ur">اسلامی کتب خانہ</h2>
-            <h2 data-lang="en">Islamic Library</h2>
-
-            <p data-lang="fa" class="active">کتاب‌های ارزشمند اسلامی را دانلود کنید</p>
-            <p data-lang="ur">قیمتی اسلامی کتب ڈاؤن لوڈ کریں</p>
-            <p data-lang="en">Download valuable Islamic books</p>
-        </div>
-
-        <div class="books-grid">
-            <!-- Book 1 -->
-            <div class="book-card">
-                <div class="book-cover">📕</div>
-                <h4 class="book-title" data-lang="fa">احکام نماز</h4>
-                <h4 class="book-title" data-lang="ur">نماز کے احکام</h4>
-                <h4 class="book-title" data-lang="en">Prayer Rules</h4>
-                
-                <p class="book-author" data-lang="fa">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="ur">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="en">Zafar Iqbal Muzaffari</p>
-                
-                <button class="download-btn" data-lang="fa">دانلود PDF</button>
-                <button class="download-btn" data-lang="ur">PDF ڈاؤن لوڈ</button>
-                <button class="download-btn" data-lang="en">Download PDF</button>
-            </div>
-
-            <!-- Book 2 -->
-            <div class="book-card">
-                <div class="book-cover">📗</div>
-                <h4 class="book-title" data-lang="fa">عقاید شیعه</h4>
-                <h4 class="book-title" data-lang="ur">شیعہ عقائد</h4>
-                <h4 class="book-title" data-lang="en">Shia Beliefs</h4>
-                
-                <p class="book-author" data-lang="fa">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="ur">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="en">Zafar Iqbal Muzaffari</p>
-                
-                <button class="download-btn" data-lang="fa">دانلود PDF</button>
-                <button class="download-btn" data-lang="ur">PDF ڈاؤن لوڈ</button>
-                <button class="download-btn" data-lang="en">Download PDF</button>
-            </div>
-
-            <!-- Book 3 -->
-            <div class="book-card">
-                <div class="book-cover">📘</div>
-                <h4 class="book-title" data-lang="fa">اخلاق اسلامی</h4>
-                <h4 class="book-title" data-lang="ur">اسلامی اخلاق</h4>
-                <h4 class="book-title" data-lang="en">Islamic Ethics</h4>
-                
-                <p class="book-author" data-lang="fa">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="ur">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="en">Zafar Iqbal Muzaffari</p>
-                
-                <button class="download-btn" data-lang="fa">دانلود PDF</button>
-                <button class="download-btn" data-lang="ur">PDF ڈاؤن لوڈ</button>
-                <button class="download-btn" data-lang="en">Download PDF</button>
-            </div>
-
-            <!-- Book 4 -->
-            <div class="book-card">
-                <div class="book-cover">📙</div>
-                <h4 class="book-title" data-lang="fa">فقه عبادات</h4>
-                <h4 class="book-title" data-lang="ur">عبادات کی فقہ</h4>
-                <h4 class="book-title" data-lang="en">Jurisprudence of Worship</h4>
-                
-                <p class="book-author" data-lang="fa">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="ur">ظفر اقبال مظفری</p>
-                <p class="book-author" data-lang="en">Zafar Iqbal Muzaffari</p>
-                
-                <button class="download-btn" data-lang="fa">دانلود PDF</button>
-                <button class="download-btn" data-lang="ur">PDF ڈاؤن لوڈ</button>
-                <button class="download-btn" data-lang="en">Download PDF</button>
-            </div>
-
-            <!-- Placeholder for more books -->
-            <div class="book-card" style="opacity: 0.6;">
-                <div class="book-cover">➕</div>
-                <h4 class="book-title" data-lang="fa">کتاب‌های بیشتر به زودی...</h4>
-                <h4 class="book-title" data-lang="ur">مزید کتب جلد آ رہی ہیں...</h4>
-                <h4 class="book-title" data-lang="en">More books coming soon...</h4>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="section-header">
-            <h2 data-lang="fa" class="active">درباره ما</h2>
-            <h2 data-lang="ur">ہمارے بارے میں</h2>
-            <h2 data-lang="en">About Us</h2>
-        </div>
-
-        <div class="about-content">
-            <div class="about-text">
-                <h3 data-lang="fa" class="active">استاد ظفر اقبال مظفری</h3>
-                <h3 data-lang="ur">استاد ظفر اقبال مظفری</h3>
-                <h3 data-lang="en">Ustad Zafar Iqbal Muzaffari</h3>
-
-                <p data-lang="fa" class="active">
-                    مرکز فکری المصباح در شهر مقدس قم با هدف ترویج معارف اسلامی و پاسخگویی به نیازهای علمی جامعه اسلامی تأسیس شده است.
-                </p>
-                <p data-lang="ur">
-                    المصباح فکری مرکز مقدس شہر قم میں اسلامی معارف کی ترویج اور اسلامی معاشرے کی علمی ضروریات کے جواب دینے کے لیے قائم کیا گیا ہے۔
-                </p>
-                <p data-lang="en">
-                    Al-Misbah Intellectual Center is established in the holy city of Qom to promote Islamic teachings and respond to the educational needs of the Islamic community.
-                </p>
-
-                <p data-lang="fa" class="active">
-                    ما با بهره‌گیری از روش‌های نوین آموزشی، در تلاشیم تا دانش اسلامی را به شکلی جامع و قابل فهم در اختیار علاقه‌مندان قرار دهیم.
-                </p>
-                <p data-lang="ur">
-                    ہم جدید تعلیمی طریقوں کا استعمال کرتے ہوئے، اسلامی علم کو جامع اور قابل فہم انداز میں دلچسپی رکھنے والوں تک پہنچانے کی کوشش کر رہے ہیں۔
-                </p>
-                <p data-lang="en">
-                    Using modern educational methods, we strive to provide Islamic knowledge in a comprehensive and understandable manner to interested learners.
-                </p>
-
-                <div class="cta-buttons" style="margin-top: 30px;">
-                    <a href="#contact" class="btn btn-primary" data-lang="fa">تماس با ما</a>
-                    <a href="#contact" class="btn btn-primary" data-lang="ur">ہم سے رابطہ کریں</a>
-                    <a href="#contact" class="btn btn-primary" data-lang="en">Contact Us</a>
-                </div>
-            </div>
-
-            <div class="about-image">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="90" fill="#1a472a" opacity="0.1"/>
-                    <text x="100" y="80" text-anchor="middle" font-size="60" fill="#1a472a">📚</text>
-                    <text x="100" y="130" text-anchor="middle" font-size="50" fill="#1a472a">🕌</text>
-                    <circle cx="100" cy="100" r="95" fill="none" stroke="#ffd700" stroke-width="3" stroke-dasharray="10,5"/>
-                </svg>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="section-header">
-            <h2 data-lang="fa" class="active">تماس با ما</h2>
-            <h2 data-lang="ur">رابطہ کریں</h2>
-            <h2 data-lang="en">Contact Us</h2>
-
-            <p data-lang="fa" class="active">ما را آماده پاسخگویی به سؤالات شما هستیم</p>
-            <p data-lang="ur">ہم آپ کے سوالات کے جواب دینے کے لیے تیار ہیں</p>
-            <p data-lang="en">We are ready to answer your questions</p>
-        </div>
-
-        <div class="contact-container">
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label data-lang="fa" class="active">نام و نام خانوادگی:</label>
-                        <label data-lang="ur">نام:</label>
-                        <label data-lang="en">Full Name:</label>
-                        <input type="text" required placeholder="نام خود را وارد کنید">
+            <div class="courses-grid">
+                <!-- Course 1 -->
+                <div class="course-card">
+                    <div class="course-image">📖</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="دوره جامع فقه" data-ur="فقہ کا جامع کورس" data-en="Comprehensive Jurisprudence Course">دوره جامع فقه</h3>
+                        <p class="course-info translatable" data-fa="آموزش کامل احکام فقهی از مبانی تا مسائل پیچیده با رویکرد استدلالی و تطبیقی" data-ur="بنیادوں سے پیچیدہ مسائل تک فقہی احکام کی مکمل تعلیم - استدلالی اور تطبیقی نقطہ نظر کے ساتھ" data-en="Complete education of jurisprudential rulings from basics to complex issues with argumentative and comparative approach">آموزش کامل احکام فقهی از مبانی تا مسائل پیچیده با رویکرد استدلالی و تطبیقی</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="40 ساعت" data-ur="40 گھنٹے" data-en="40 hours">40 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: پیشرفته" data-ur="لیول: ایڈوانس" data-en="Level: Advanced">سطح: پیشرفته</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label data-lang="fa" class="active">ایمیل:</label>
-                        <label data-lang="ur">ای میل:</label>
-                        <label data-lang="en">Email:</label>
-                        <input type="email" required placeholder="example@email.com">
+                <!-- Course 2 -->
+                <div class="course-card">
+                    <div class="course-image">🕌</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="مبانی عقاید اسلامی" data-ur="اسلامی عقائد کی بنیادیں" data-en="Foundations of Islamic Beliefs">مبانی عقاید اسلامی</h3>
+                        <p class="course-info translatable" data-fa="بررسی اصول اعتقادی شیعه با تکیه بر قرآن، روایات و براهین عقلی" data-ur="قرآن، روایات اور عقلی دلائل کی روشنی میں شیعہ عقائد کے اصولوں کا جائزہ" data-en="Examination of Shia belief principles based on Quran, narrations and rational proofs">بررسی اصول اعتقادی شیعه با تکیه بر قرآن، روایات و براهین عقلی</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="30 ساعت" data-ur="30 گھنٹے" data-en="30 hours">30 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: متوسط" data-ur="لیول: درمیانی" data-en="Level: Intermediate">سطح: متوسط</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label data-lang="fa" class="active">شماره تماس:</label>
-                        <label data-lang="ur">فون نمبر:</label>
-                        <label data-lang="en">Phone Number:</label>
-                        <input type="tel" placeholder="+98 900 000 0000">
+                <!-- Course 3 -->
+                <div class="course-card">
+                    <div class="course-image">💎</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="اخلاق کاربردی" data-ur="عملی اخلاقیات" data-en="Practical Ethics">اخلاق کاربردی</h3>
+                        <p class="course-info translatable" data-fa="راهکارهای عملی برای تزکیه نفس و کسب فضایل اخلاقی در زندگی روزمره" data-ur="روزمرہ زندگی میں نفس کی پاکیزگی اور اخلاقی فضائل کے حصول کے لیے عملی حل" data-en="Practical solutions for self-purification and acquiring moral virtues in daily life">راهکارهای عملی برای تزکیه نفس و کسب فضایل اخلاقی در زندگی روزمره</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="25 ساعت" data-ur="25 گھنٹے" data-en="25 hours">25 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: مقدماتی" data-ur="لیول: ابتدائی" data-en="Level: Beginner">سطح: مقدماتی</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label data-lang="fa" class="active">پیام:</label>
-                        <label data-lang="ur">پیغام:</label>
-                        <label data-lang="en">Message:</label>
-                        <textarea required placeholder="پیام خود را بنویسید..."></textarea>
+                <!-- Course 4 -->
+                <div class="course-card">
+                    <div class="course-image">📚</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="تفسیر قرآن" data-ur="تفسیر قرآن" data-en="Quranic Exegesis">تفسیر قرآن</h3>
+                        <p class="course-info translatable" data-fa="تفسیر موضوعی و ترتیبی قرآن کریم با بهره‌گیری از منابع معتبر تفسیری" data-ur="معتبر تفسیری ذرائع سے استفادہ کرتے ہوئے قرآن کریم کی موضوعاتی اور ترتیبی تفسیر" data-en="Thematic and sequential exegesis of the Holy Quran using reliable interpretive sources">تفسیر موضوعی و ترتیبی قرآن کریم با بهره‌گیری از منابع معتبر تفسیری</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="50 ساعت" data-ur="50 گھنٹے" data-en="50 hours">50 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: پیشرفته" data-ur="لیول: ایڈوانس" data-en="Level: Advanced">سطح: پیشرفته</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <span data-lang="fa" class="active">ارسال پیام</span>
-                        <span data-lang="ur">پیغام بھیجیں</span>
-                        <span data-lang="en">Send Message</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="contact-info-box">
-                <h3 data-lang="fa" class="active">اطلاعات تماس</h3>
-                <h3 data-lang="ur">رابطہ کی معلومات</h3>
-                <h3 data-lang="en">Contact Information</h3>
-
-                <div class="contact-item-detail">
-                    <span>📞</span>
-                    <p data-lang="fa" class="active">شماره تماس:</p>
-                    <p data-lang="ur">فون نمبر:</p>
-                    <p data-lang="en">Phone Numbers:</p>
-                    <a href="tel:+989024064467">+98 902 406 4467</a><br>
-                    <a href="tel:+989918126499">+98 991 812 6499</a>
                 </div>
 
-                <div class="contact-item-detail">
-                    <span>📧</span>
-                    <p data-lang="fa" class="active">ایمیل:</p>
-                    <p data-lang="ur">ای میل:</p>
-                    <p data-lang="en">Email:</p>
-                    <a href="mailto:hafizzafariqbal327@gmail.com">hafizzafariqbal327@gmail.com</a>
+                <!-- Course 5 -->
+                <div class="course-card">
+                    <div class="course-image">⚖️</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="اصول فقه" data-ur="اصول فقہ" data-en="Principles of Jurisprudence">اصول فقه</h3>
+                        <p class="course-info translatable" data-fa="آموزش قواعد و روش‌های استنباط احکام شرعی از منابع اسلامی" data-ur="اسلامی ذرائع سے شرعی احکام کے استنباط کے اصول اور طریقے کی تعلیم" data-en="Teaching rules and methods of deriving Islamic rulings from Islamic sources">آموزش قواعد و روش‌های استنباط احکام شرعی از منابع اسلامی</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="45 ساعت" data-ur="45 گھنٹے" data-en="45 hours">45 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: پیشرفته" data-ur="لیول: ایڈوانس" data-en="Level: Advanced">سطح: پیشرفته</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
+                    </div>
                 </div>
 
-                <div class="contact-item-detail">
-                    <span>💬</span>
-                    <p data-lang="fa" class="active">واتساپ:</p>
-                    <p data-lang="ur">واٹس ایپ:</p>
-                    <p data-lang="en">WhatsApp:</p>
-                    <a href="https://wa.me/989024064467" target="_blank">پیام مستقیم / Direct Chat</a>
-                </div>
-
-                <div class="contact-item-detail">
-                    <span>📱</span>
-                    <p data-lang="fa" class="active">ایتا:</p>
-                    <p data-lang="ur">ایتا:</p>
-                    <p data-lang="en">Eitaa:</p>
-                    <a href="https://eitaa.com/Zafar1" target="_blank">@Zafar1</a>
-                </div>
-
-                <div class="contact-item-detail">
-                    <span>📍</span>
-                    <p data-lang="fa" class="active">آدرس:</p>
-                    <p data-lang="ur">پتہ:</p>
-                    <p data-lang="en">Address:</p>
-                    <span data-lang="fa" class="active" style="font-size: 1rem; color: white;">قم، ایران</span>
-                    <span data-lang="ur" style="font-size: 1rem; color: white;">قم، ایران</span>
-                    <span data-lang="en" style="font-size: 1rem; color: white;">Qom, Iran</span>
+                <!-- Course 6 -->
+                <div class="course-card">
+                    <div class="course-image">❓</div>
+                    <div class="course-content">
+                        <h3 class="translatable" data-fa="پاسخگویی به شبهات" data-ur="شبہات کے جوابات" data-en="Answering Doubts">پاسخگویی به شبهات</h3>
+                        <p class="course-info translatable" data-fa="بررسی و پاسخ به شبهات رایج درباره اسلام و تشیع با رویکردی علمی و منطقی" data-ur="اسلام اور تشیع کے بارے میں عام شبہات کا علمی اور منطقی جائزہ اور جوابات" data-en="Examination and response to common doubts about Islam and Shiism with a scientific and logical approach">بررسی و پاسخ به شبهات رایج درباره اسلام و تشیع با رویکردی علمی و منطقی</p>
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <span>⏱️</span>
+                                <span class="translatable" data-fa="35 ساعت" data-ur="35 گھنٹے" data-en="35 hours">35 ساعت</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>👨‍🏫</span>
+                                <span class="translatable" data-fa="ظفر اقبال مظفری" data-ur="ظفر اقبال مظفری" data-en="Zafar Iqbal Muzaffari">ظفر اقبال مظفری</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📊</span>
+                                <span class="translatable" data-fa="سطح: متوسط" data-ur="لیول: درمیانی" data-en="Level: Intermediate">سطح: متوسط</span>
+                            </div>
+                        </div>
+                        <button class="enroll-btn translatable" data-fa="ثبت‌نام در دوره" data-ur="کورس میں اندراج" data-en="Enroll in Course">ثبت‌نام در دوره</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <!-- About Section -->
-            <div class="footer-section">
-                <h3 data-lang="fa" class="active">درباره المصباح</h3>
-                <h3 data-lang="ur">المصباح کے بارے میں</h3>
-                <h3 data-lang="en">About Al-Misbah</h3>
-                
-                <p data-lang="fa" class="active">
-                    مرکز فکری اسلامی المصباح با هدف ترویج معارف اسلامی و پاسخگویی به شبهات فعالیت می‌کند.
-                </p>
-                <p data-lang="ur">
-                    المصباح اسلامی فکری مرکز اسلامی معارف کی ترویج اور شبہات کے جوابات کے لیے کام کر رہا ہے۔
-                </p>
-                <p data-lang="en">
-                    Al-Misbah Islamic Intellectual Center works to promote Islamic knowledge and answer doubts.
-                </p>
+        <!-- Books Section -->
+        <section id="books" class="section">
+            <div class="hero">
+                <h2 class="translatable" data-fa="کتابخانه دیجیتال" data-ur="ڈیجیٹل لائبریری" data-en="Digital Library">کتابخانه دیجیتال</h2>
+                <p class="translatable" data-fa="مجموعه‌ای غنی از کتب اسلامی در موضوعات مختلف قابل دانلود به صورت رایگان" data-ur="مختلف موضوعات میں اسلامی کتب کا بھرپور مجموعہ - مفت ڈاؤن لوڈ کے لیے دستیاب" data-en="A rich collection of Islamic books on various topics available for free download">مجموعه‌ای غنی از کتب اسلامی در موضوعات مختلف قابل دانلود به صورت رایگان</p>
+            </div>
 
-                <div class="social-links">
-                    <a href="https://wa.me/989024064467" target="_blank">💬</a>
-                    <a href="https://eitaa.com/Zafar1" target="_blank">📱</a>
-                    <a href="mailto:hafizzafariqbal327@gmail.com">📧</a>
-                    <a href="tel:+989024064467">📞</a>
+            <div class="books-grid">
+                <!-- Book 1 -->
+                <div class="book-card">
+                    <div class="book-icon">📕</div>
+                    <h3 class="translatable" data-fa="راهنمای عملی فقه" data-ur="فقہ کی عملی رہنمائی" data-en="Practical Guide to Jurisprudence">راهنمای عملی فقه</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="کتابی جامع در زمینه احکام فقهی روزمره با رویکردی ساده و کاربردی برای عموم مردم" data-ur="روزمرہ فقہی احکام پر ایک جامع کتاب - عام لوگوں کے لیے آسان اور عملی انداز میں" data-en="A comprehensive book on daily jurisprudential rulings with a simple and practical approach for the general public">کتابی جامع در زمینه احکام فقهی روزمره با رویکردی ساده و کاربردی</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
+                </div>
+
+                <!-- Book 2 -->
+                <div class="book-card">
+                    <div class="book-icon">📗</div>
+                    <h3 class="translatable" data-fa="اصول اعتقادات شیعه" data-ur="شیعہ عقائد کے اصول" data-en="Principles of Shia Beliefs">اصول اعتقادات شیعه</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="بررسی تفصیلی پنج اصل اعتقادی (توحید، عدل، نبوت، امامت، معاد) با ادله عقلی و نقلی" data-ur="پانچ عقیدتی اصولوں (توحید، عدل، نبوت، امامت، معاد) کا تفصیلی جائزہ عقلی اور نقلی دلائل کے ساتھ" data-en="Detailed examination of five belief principles (Monotheism, Justice, Prophethood, Imamate, Resurrection) with rational and textual evidence">بررسی تفصیلی پنج اصل اعتقادی با ادله عقلی و نقلی</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
+                </div>
+
+                <!-- Book 3 -->
+                <div class="book-card">
+                    <div class="book-icon">📘</div>
+                    <h3 class="translatable" data-fa="مکتب اخلاق اهل بیت" data-ur="اہل بیت کا اخلاقی مکتب" data-en="Ahl al-Bayt's School of Ethics">مکتب اخلاق اهل بیت</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="معرفی اصول و روش‌های تربیت اخلاقی در سیره اهل بیت علیهم السلام با ارائه نمونه‌های عملی" data-ur="اہل بیت علیہم السلام کی سیرت میں اخلاقی تربیت کے اصول اور طریقے - عملی مثالوں کے ساتھ" data-en="Introducing principles and methods of moral training in the conduct of Ahl al-Bayt with practical examples">معرفی اصول و روش‌های تربیت اخلاقی در سیره اهل بیت</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
+                </div>
+
+                <!-- Book 4 -->
+                <div class="book-card">
+                    <div class="book-icon">📙</div>
+                    <h3 class="translatable" data-fa="شبهه‌شناسی و پاسخ‌گویی" data-ur="شبہات کی شناخت اور جوابات" data-en="Identifying and Answering Doubts">شبهه‌شناسی و پاسخ‌گویی</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="پاسخ جامع به شبهات رایج درباره اسلام و تشیع با رویکردی علمی، منطقی و استدلالی" data-ur="اسلام اور تشیع کے بارے میں عام شبہات کے جامع جوابات - علمی، منطقی اور استدلالی انداز میں" data-en="Comprehensive answers to common doubts about Islam and Shiism with a scientific, logical and argumentative approach">پاسخ جامع به شبهات رایج درباره اسلام و تشیع</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
+                </div>
+
+                <!-- Book 5 -->
+                <div class="book-card">
+                    <div class="book-icon">📔</div>
+                    <h3 class="translatable" data-fa="تفسیر موضوعی قرآن" data-ur="قرآن کی موضوعاتی تفسیر" data-en="Thematic Interpretation of Quran">تفسیر موضوعی قرآن</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="بررسی موضوعات کلیدی قرآن کریم شامل توحید، عدالت، معاد، امامت و احکام" data-ur="قرآن کریم کے کلیدی موضوعات کا جائزہ - توحید، عدالت، معاد، امامت اور احکام" data-en="Examination of key topics of the Holy Quran including Monotheism, Justice, Resurrection, Imamate and Rulings">بررسی موضوعات کلیدی قرآن کریم</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
+                </div>
+
+                <!-- Book 6 -->
+                <div class="book-card">
+                    <div class="book-icon">📓</div>
+                    <h3 class="translatable" data-fa="فلسفه احکام اسلامی" data-ur="اسلامی احکام کا فلسفہ" data-en="Philosophy of Islamic Rulings">فلسفه احکام اسلامی</h3>
+                    <p class="book-author translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</p>
+                    <p class="book-description translatable" data-fa="تبیین حکمت و فلسفه احکام شرعی و پاسخ به سوال 'چرا' در مسائل فقهی" data-ur="شرعی احکام کی حکمت اور فلسفے کی وضاحت اور فقہی مسائل میں 'کیوں' کا جواب" data-en="Explaining the wisdom and philosophy of Islamic rulings and answering 'why' in jurisprudential issues">تبیین حکمت و فلسفه احکام شرعی</p>
+                    <a href="#" class="download-btn translatable" data-fa="دانلود کتاب (PDF)" data-ur="کتاب ڈاؤن لوڈ کریں (PDF)" data-en="Download Book (PDF)">دانلود کتاب (PDF)</a>
                 </div>
             </div>
+        </section>
 
-            <!-- Quick Links -->
-            <div class="footer-section">
-                <h3 data-lang="fa" class="active">دسترسی سریع</h3>
-                <h3 data-lang="ur">فوری رسائی</h3>
-                <h3 data-lang="en">Quick Links</h3>
-                
-                <ul>
-                    <li><a href="#home" data-lang="fa" class="active">صفحه اصلی</a>
-                        <a href="#home" data-lang="ur">ہوم</a>
-                        <a href="#home" data-lang="en">Home</a></li>
-                    
-                    <li><a href="#topics" data-lang="fa" class="active">موضوعات</a>
-                        <a href="#topics" data-lang="ur">موضوعات</a>
-                        <a href="#topics" data-lang="en">Topics</a></li>
-                    
-                    <li><a href="#books" data-lang="fa" class="active">کتابخانه</a>
-                        <a href="#books" data-lang="ur">کتب خانہ</a>
-                        <a href="#books" data-lang="en">Library</a></li>
-                    
-                    <li><a href="#about" data-lang="fa" class="active">درباره ما</a>
-                        <a href="#about" data-lang="ur">ہمارے بارے میں</a>
-                        <a href="#about" data-lang="en">About</a></li>
-                    
-                    <li><a href="#contact" data-lang="fa" class="active">تماس</a>
-                        <a href="#contact" data-lang="ur">رابطہ</a>
-                        <a href="#contact" data-lang="en">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Topics -->
-            <div class="footer-section">
-                <h3 data-lang="fa" class="active">موضوعات</h3>
-                <h3 data-lang="ur">موضوعات</h3>
-                <h3 data-lang="en">Topics</h3>
-                
-                <ul>
-                    <li><span data-lang="fa" class="active">📖 احکام</span>
-                        <span data-lang="ur">📖 احکام</span>
-                        <span data-lang="en">📖 Rules</span></li>
-                    
-                    <li><span data-lang="fa" class="active">🕌 عقاید</span>
-                        <span data-lang="ur">🕌 عقائد</span>
-                        <span data-lang="en">🕌 Beliefs</span></li>
-                    
-                    <li><span data-lang="fa" class="active">💎 اخلاق</span>
-                        <span data-lang="ur">💎 اخلاق</span>
-                        <span data-lang="en">💎 Ethics</span></li>
-                    
-                    <li><span data-lang="fa" class="active">⚖️ فقه</span>
-                        <span data-lang="ur">⚖️ فقہ</span>
-                        <span data-lang="en">⚖️ Jurisprudence</span></li>
-                    
-                    <li><span data-lang="fa" class="active">🌍 علوم انسانی</span>
-                        <span data-lang="ur">🌍 انسانی علوم</span>
-                        <span data-lang="en">🌍 Human Sciences</span></li>
-                    
-                    <li><span data-lang="fa" class="active">❓ پاسخ به شبهات</span>
-                        <span data-lang="ur">❓ شبہات کے جوابات</span>
-                        <span data-lang="en">❓ Answering Doubts</span></li>
-                </ul>
-            </div>
-
-            <!-- Contact -->
-            <div class="footer-section">
-                <h3 data-lang="fa" class="active">تماس با ما</h3>
-                <h3 data-lang="ur">رابطہ کریں</h3>
-                <h3 data-lang="en">Contact Us</h3>
-                
-                <ul>
-                    <li><a href="tel:+989024064467">📞 +98 902 406 4467</a></li>
-                    <li><a href="tel:+989918126499">📞 +98 991 812 6499</a></li>
-                    <li><a href="mailto:hafizzafariqbal327@gmail.com">📧 Email</a></li>
-                    <li><a href="https://wa.me/989024064467" target="_blank">💬 WhatsApp</a></li>
-                    <li><a href="https://eitaa.com/Zafar1" target="_blank">📱 Eitaa</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p data-lang="fa" class="active">
-                © 2025 المصباح - مرکز فکری اسلامی قم | تمامی حقوق محفوظ است
-            </p>
-            <p data-lang="ur">
-                © 2025 المصباح - اسلامی فکری مرکز قم | تمام حقوق محفوظ ہیں
-            </p>
-            <p data-lang="en">
-                © 2025 Al-Misbah - Islamic Intellectual Center Qom | All Rights Reserved
-            </p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // ==================== LANGUAGE SWITCHER ====================
-        let currentLang = 'fa';
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="hero">
+                <h2 class="translatable" data-fa="تماس با ما" data-ur="ہم سے رابطہ کریں" data-en="Contact Us">تماس با ما</h2>
+                <p class="translatable" data-fa="برای دریافت اطلاعات بیشتر یا ثبت‌نام در دوره‌ها با ما در ارتباط باشید" data-ur="مزید معلومات یا کورسز میں اندراج کے لیے ہم سے رابطہ کریں" data-en="Contact us for more information or to enroll in courses">برای دریافت اطلاعات بیشتر یا ثبت‌نام در دوره‌ها با ما در ارتباط باشید</p>
+      <script>
+        // ============================================
+        // LANGUAGE SWITCHING FUNCTIONALITY
+        // ============================================
+        let currentLanguage = 'fa'; // Default language
 
         function switchLanguage(lang) {
-            currentLang = lang;
+            currentLanguage = lang;
             
-            // Update body direction
-            if (lang === 'en') {
-                document.body.classList.add('ltr');
-            } else {
-                document.body.classList.remove('ltr');
-            }
-
-            // Hide all language elements
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.classList.remove('active');
-                el.style.display = 'none';
-            });
-
-            // Show selected language elements
-            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
-                el.classList.add('active');
-                el.style.display = el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'SPAN' ? 'inline-block' : 'block';
-            });
-
-            // Update language buttons
+            // Update active button
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
 
-            // Store preference
-            localStorage.setItem('preferredLanguage', lang);
+            // Update all translatable elements
+            document.querySelectorAll('.translatable').forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+                if (text) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+
+            // Update document direction for RTL languages
+            if (lang === 'fa' || lang === 'ur') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            // Update body font family
+            if (lang === 'ur') {
+                document.body.style.fontFamily = "'Noto Nastaliq Urdu', 'Amiri', serif";
+            } else if (lang === 'fa') {
+                document.body.style.fontFamily = "'Vazirmatn', 'Amiri', serif";
+            } else {
+                document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+            }
         }
 
-        // Load saved language preference
-        window.addEventListener('load', () => {
-            const savedLang = localStorage.getItem('preferredLanguage') || 'fa';
-            const langBtn = document.querySelector(`.lang-btn[onclick="switchLanguage('${savedLang}')"]`);
-            if (langBtn) {
-                langBtn.click();
+        // ============================================
+        // SECTION NAVIGATION
+        // ============================================
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.remove('active');
+
+            // Close mobile menu if open
+            const nav = document.querySelector('.nav-links');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        }
+
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-links');
+            const burger = document.querySelector('.burger-menu');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        // ============================================
+        // SCROLL TO TOP FUNCTIONALITY
+        // ============================================
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollButton = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollButton.style.display = 'flex';
+            } else {
+                scrollButton.style.display = 'none';
+            }
+
+            // Navbar background on scroll
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 50) {
+                navbar.style.background = 'rgba(26, 35, 126, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.2)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #1a237e 0%, #283593 100%)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             }
         });
 
-        // ==================== MOBILE MENU ====================
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-
-        // Close menu on link click
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navMenu').classList.remove('active');
-            });
+        // ============================================
+        // LOADING SCREEN
+        // ============================================
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
         });
 
-        // ==================== SMOOTH SCROLL ====================
+        // ============================================
+        // CONTACT FORM SUBMISSION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const formData = new FormData(this);
+                    
+                    // Show success message
+                    const messages = {
+                        'fa': 'پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.',
+                        'ur': 'آپ کا پیغام کامیابی سے بھیج دیا گیا ہے۔ ہم جلد ہی آپ سے رابطہ کریں گے۔',
+                        'en': 'Your message has been sent successfully. We will contact you soon.'
+                    };
+                    
+                    alert(messages[currentLanguage]);
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+        });
+
+        // ============================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -1460,93 +1155,205 @@
             });
         });
 
-        // ==================== BACK TO TOP ====================
-        const backToTop = document.getElementById('backToTop');
+        // ============================================
+        // CARD HOVER EFFECTS
+        // ============================================
+        document.querySelectorAll('.topic-card, .article-card, .course-card, .book-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
 
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
+        // ============================================
+        // SEARCH FUNCTIONALITY
+        // ============================================
+        function searchContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const allCards = document.querySelectorAll('.article-card, .course-card, .book-card');
+            
+            allCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // ============================================
+        // DOWNLOAD BUTTON FUNCTIONALITY
+        // ============================================
+        document.querySelectorAll('.download-btn, .pdf-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const messages = {
+                    'fa': 'فایل در حال آماده‌سازی است... لطفاً منتظر بمانید.',
+                    'ur': 'فائل تیار ہو رہی ہے... براہ کرم انتظار کریں۔',
+                    'en': 'File is being prepared... Please wait.'
+                };
+                
+                alert(messages[currentLanguage]);
+            });
+        });
+
+        // ============================================
+        // AUDIO/LISTEN BUTTON FUNCTIONALITY
+        // ============================================
+        document.querySelectorAll('.audio-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const messages = {
+                    'fa': 'پخش صوتی به زودی فعال خواهد شد.',
+                    'ur': 'آڈیو پلے بیک جلد فعال ہوگا۔',
+                    'en': 'Audio playback will be activated soon.'
+                };
+                
+                alert(messages[currentLanguage]);
+            });
+        });
+
+        // ============================================
+        // ENROLL BUTTON FUNCTIONALITY
+        // ============================================
+        document.querySelectorAll('.enroll-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const courseName = this.closest('.course-card').querySelector('h3').textContent;
+                
+                const messages = {
+                    'fa': `برای ثبت‌نام در دوره "${courseName}" لطفاً با ما تماس بگیرید:\n📞 +989024064467\n📱 +989918126499`,
+                    'ur': `کورس "${courseName}" میں اندراج کے لیے براہ کرم ہم سے رابطہ کریں:\n📞 +989024064467\n📱 +989918126499`,
+                    'en': `To enroll in "${courseName}" course, please contact us:\n📞 +989024064467\n📱 +989918126499`
+                };
+                
+                alert(messages[currentLanguage]);
+            });
+        });
+
+        // ============================================
+        // INITIALIZE ON PAGE LOAD
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default language to Farsi
+            const faButton = document.querySelector('.lang-btn[onclick*="fa"]');
+            if (faButton) {
+                faButton.classList.add('active');
+            }
+            
+            // Show home section by default
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            const homeSection = document.getElementById('home');
+            if (homeSection) {
+                homeSection.style.display = 'block';
+            }
+            
+            // Add fade-in animation to all sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease';
+                observer.observe(section);
+            });
+        });
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) searchInput.focus();
+            }
+            
+            // ESC to close mobile menu
+            if (e.key === 'Escape') {
+                const nav = document.querySelector('.nav-links');
+                if (nav && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    const burger = document.querySelector('.burger-menu');
+                    if (burger) burger.classList.remove('active');
+                }
             }
         });
 
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // ==================== LOADING SCREEN ====================
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hide');
-            }, 1000);
-        });
-
-        // ==================== FORM SUBMISSION ====================
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            
-            // Show success message
-            alert(currentLang === 'fa' ? 'پیام شما با موفقیت ارسال شد!' :
-                  currentLang === 'ur' ? 'آپ کا پیغام کامیابی سے بھیج دیا گیا!' :
-                  'Your message has been sent successfully!');
-            
-            // Reset form
-            this.reset();
-        });
-
-        // ==================== ANIMATIONS ON SCROLL ====================
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // ============================================
+        // SHARE FUNCTIONALITY
+        // ============================================
+        async function shareContent(title, text, url) {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: title,
+                        text: text,
+                        url: url || window.location.href
+                    });
+                } catch (err) {
+                    console.log('Error sharing:', err);
                 }
-            });
-        }, observerOptions);
+            } else {
+                const shareUrl = window.location.href;
+                navigator.clipboard.writeText(shareUrl);
+                const messages = {
+                    'fa': 'لینک کپی شد!',
+                    'ur': 'لنک کاپی ہو گیا!',
+                    'en': 'Link copied!'
+                };
+                alert(messages[currentLanguage]);
+            }
+        }
 
-        // Observe all cards and sections
-        document.querySelectorAll('.card, .topic-item, .book-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
+        // ============================================
+        // THEME TOGGLE (Dark/Light Mode)
+        // ============================================
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        window.addEventListener('load', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
         });
 
-        // ==================== DOWNLOAD BUTTONS ====================
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const bookTitle = this.parentElement.querySelector('.book-title.active').textContent;
-                alert(currentLang === 'fa' ? `دانلود ${bookTitle} به زودی فعال می‌شود` :
-                      currentLang === 'ur' ? `${bookTitle} کی ڈاؤن لوڈ جلد فعال ہوگی` :
-                      `Download for ${bookTitle} will be available soon`);
-            });
-        });
-
-        // ==================== TOPIC ITEMS CLICK ====================
-        document.querySelectorAll('.topic-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const topicName = this.querySelector('h4.active').textContent;
-                alert(currentLang === 'fa' ? `صفحه ${topicName} به زودی اضافه می‌شود` :
-                      currentLang === 'ur' ? `${topicName} کا صفحہ جلد شامل کیا جائے گا` :
-                      `${topicName} page will be added soon`);
-            });
-        });
-
-        // ==================== CONSOLE MESSAGE ====================
-        console.log('%c🕌 المصباح - مرکز فکری اسلامی قم', 'color: #1a472a; font-size: 20px; font-weight: bold;');
-        console.log('%cDeveloped with ❤️ for Islamic Knowledge', 'color: #ffd700; font-size: 14px;');
+        // ============================================
+        // CONSOLE GREETING
+        // ============================================
+        console.log('%c🌙 المصباح - Al-Misbah Islamic Knowledge Center', 'font-size: 20px; color: #1a237e; font-weight: bold;');
+        console.log('%c👨‍🏫 Manager & Founder: Zafar Iqbal Muzaffari', 'font-size: 14px; color: #283593;');
+        console.log('%c📧 Contact: hafizzafariqbal327@gmail.com', 'font-size: 12px; color: #3949ab;');
+        console.log('%c📞 Phone: +989024064467 | +989918126499', 'font-size: 12px; color: #3949ab;');
     </script>
 </body>
 </html>
+
+        
