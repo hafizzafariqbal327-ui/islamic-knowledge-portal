@@ -447,7 +447,109 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-    </style>
+ /* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #1a472a 0%, #2d5f3f 100%);
+    color: white;
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.footer-contact h3 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: bold;
+}
+
+.contact-item {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,215,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: #ffd700;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.2);
+}
+
+.contact-item span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+}
+
+.contact-item p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.contact-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.contact-item a:hover {
+    background: rgba(255,215,0,0.2);
+    color: #ffd700;
+    transform: scale(1.05);
+}
+
+#footer-copyright {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255,215,0,0.3);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .footer-contact {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .contact-item {
+        padding: 25px;
+    }
+        }   </style>
 </head>
 <body dir="rtl">
     <header>
@@ -1349,3 +1451,4 @@
     </script>
 </body>
 </html>
+
