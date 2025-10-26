@@ -756,14 +756,307 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             color: rgba(255,255,255,0.8);
         }
-        
+
         /* ==================== SCROLL TO TOP ==================== */
         .scroll-top {
             position: fixed;
             bottom: 30px;
             left: 30px;
             width: 50px;
-            heigh        <!-- Courses Section -->
+            height: 50px;
+            background: var(--accent-gold);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-green);
+            transform: translateY(-5px);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .site-title h1 {
+                font-size: 1.3rem;
+            }
+
+            .topics-grid,
+            .articles-container,
+            .courses-grid,
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Top Contact Bar -->
+    <div class="top-contact">
+        <div class="contact-links">
+            <a href="tel:+989024064467">📞 +989024064467</a>
+            <a href="tel:+989918126499">📞 +989918126499</a>
+            <a href="mailto:hafizzafariqbal327@gmail.com">✉️ hafizzafariqbal327@gmail.com</a>
+            <a href="https://wa.me/989024064467" target="_blank">💬 WhatsApp</a>
+            <a href="https://eitaa.com/Zafar1" target="_blank">📱 Eitaa</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a4d2e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#logoGradient)"/>
+                    <path d="M 50 20 L 50 50 L 70 70" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="8" fill="white"/>
+                    <text x="50" y="90" font-family="Arial" font-size="12" fill="#1a4d2e" text-anchor="middle" font-weight="bold">المصباح</text>
+                </svg>
+                <div class="site-title">
+                    <h1 class="translatable" data-fa="المصباح" data-ur="المصباح" data-en="Al-Misbah">المصباح</h1>
+                    <p class="translatable" data-fa="مرکز فکری اسلامی قم" data-ur="اسلامی نالج سینٹر - قم" data-en="Islamic Knowledge Center - Qom">مرکز فکری اسلامی قم</p>
+                </div>
+            </div>
+            
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('fa')">فارسی</button>
+                <button class="lang-btn" onclick="switchLanguage('ur')">اردو</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-menu">
+            <button class="nav-btn active translatable" data-fa="خانه" data-ur="ہوم" data-en="Home" onclick="showSection('home')">خانه</button>
+            <button class="nav-btn translatable" data-fa="مقالات" data-ur="مقالات" data-en="Articles" onclick="showSection('articles')">مقالات</button>
+            <button class="nav-btn translatable" data-fa="دوره‌ها" data-ur="کورسز" data-en="Courses" onclick="showSection('courses')">دوره‌ها</button>
+            <button class="nav-btn translatable" data-fa="کتابخانه" data-ur="کتب خانہ" data-en="Library" onclick="showSection('books')">کتابخانه</button>
+            <button class="nav-btn translatable" data-fa="تماس با ما" data-ur="رابطہ" data-en="Contact" onclick="showSection('contact')">تماس با ما</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2 class="translatable" data-fa="به مرکز فکری اسلامی المصباح خوش آمدید" data-ur="المصباح اسلامی فکری مرکز میں خوش آمدید" data-en="Welcome to Al-Misbah Islamic Knowledge Center">به مرکز فکری اسلامی المصباح خوش آمدید</h2>
+                <p class="translatable" data-fa="مرکز المصباح با هدف ارتقای سطح دانش اسلامی و پاسخگویی به نیازهای علمی جامعه اسلامی، دوره‌های آموزشی تخصصی در زمینه‌های فقه، عقاید، اخلاق و علوم انسانی ارائه می‌دهد." data-ur="المصباح مرکز کا مقصد اسلامی علم کو فروغ دینا اور مسلم معاشرے کی علمی ضروریات کو پورا کرنا ہے۔ ہم فقہ، عقائد، اخلاقیات اور انسانی علوم میں خصوصی کورسز پیش کرتے ہیں۔" data-en="Al-Misbah Center aims to enhance Islamic knowledge and meet the educational needs of the Muslim community, offering specialized courses in Jurisprudence, Beliefs, Ethics, and Human Sciences.">مرکز المصباح با هدف ارتقای سطح دانش اسلامی و پاسخگویی به نیازهای علمی جامعه اسلامی، دوره‌های آموزشی تخصصی در زمینه‌های فقه، عقاید، اخلاق و علوم انسانی ارائه می‌دهد.</p>
+                <a href="#" class="cta-button translatable" data-fa="شروع یادگیری" data-ur="سیکھنا شروع کریں" data-en="Start Learning" onclick="showSection('courses')">شروع یادگیری</a>
+            </div>
+
+            <!-- Topics Grid -->
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-icon">📖</div>
+                    <h3 class="translatable" data-fa="احکام" data-ur="احکام" data-en="Islamic Rules">احکام</h3>
+                    <p class="translatable" data-fa="آشنایی با احکام و مسائل شرعی در زندگی روزمره" data-ur="روزمرہ زندگی میں شرعی احکام اور مسائل سے آگاہی" data-en="Understanding Islamic rulings and issues in daily life">آشنایی با احکام و مسائل شرعی در زندگی روزمره</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">🕌</div>
+                    <h3 class="translatable" data-fa="عقاید" data-ur="عقائد" data-en="Islamic Beliefs">عقاید</h3>
+                    <p class="translatable" data-fa="بررسی اصول اعتقادی اسلام و پاسخ به شبهات" data-ur="اسلامی عقائد کی بنیادوں کا جائزہ اور شبہات کے جوابات" data-en="Examining Islamic beliefs and answering doubts">بررسی اصول اعتقادی اسلام و پاسخ به شبهات</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">💎</div>
+                    <h3 class="translatable" data-fa="اخلاق" data-ur="اخلاق" data-en="Ethics">اخلاق</h3>
+                    <p class="translatable" data-fa="آموزش فضائل اخلاقی و تهذیب نفس" data-ur="اخلاقی فضائل کی تعلیم اور نفس کی تربیت" data-en="Teaching moral virtues and self-purification">آموزش فضائل اخلاقی و تهذیب نفس</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">⚖️</div>
+                    <h3 class="translatable" data-fa="فقه" data-ur="فقہ" data-en="Jurisprudence">فقه</h3>
+                    <p class="translatable" data-fa="مطالعه عمیق مسائل فقهی و استنباط احکام" data-ur="فقہی مسائل کا گہرا مطالعہ اور احکام کا استنباط" data-en="Deep study of jurisprudential issues and deriving rulings">مطالعه عمیق مسائل فقهی و استنباط احکام</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">🎓</div>
+                    <h3 class="translatable" data-fa="علوم انسانی" data-ur="علوم انسانی" data-en="Human Sciences">علوم انسانی</h3>
+                    <p class="translatable" data-fa="بررسی علوم انسانی از منظر اسلامی" data-ur="اسلامی نقطہ نظر سے انسانی علوم کا جائزہ" data-en="Examining human sciences from an Islamic perspective">بررسی علوم انسانی از منظر اسلامی</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">❓</div>
+                    <h3 class="translatable" data-fa="پاسخ به شبهات" data-ur="شبہات کے جوابات" data-en="Answering Doubts">پاسخ به شبهات</h3>
+                    <p class="translatable" data-fa="پاسخگویی به سوالات و شبهات دینی" data-ur="دینی سوالات اور شبہات کے جوابات" data-en="Answering religious questions and doubts">پاسخگویی به سوالات و شبهات دینی</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="section">
+            <div class="hero">
+                <h2 class="translatable" data-fa="مقالات علمی" data-ur="علمی مقالات" data-en="Scientific Articles">مقالات علمی</h2>
+                <p class="translatable" data-fa="مجموعه‌ای از مقالات تخصصی در حوزه‌های مختلف علوم اسلامی" data-ur="اسلامی علوم کے مختلف شعبوں میں خصوصی مقالات کا مجموعہ" data-en="A collection of specialized articles in various fields of Islamic sciences">مجموعه‌ای از مقالات تخصصی در حوزه‌های مختلف علوم اسلامی</p>
+            </div>
+
+            <div class="articles-container">
+                <!-- Article 1 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="نماز؛ ستون دین" data-ur="نماز: دین کا ستون" data-en="Prayer: The Pillar of Religion">نماز؛ ستون دین</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: احکام" data-ur="موضوع: احکام" data-en="Topic: Rules">موضوع: احکام</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="نماز مهم‌ترین عبادت در اسلام است که اهمیت و آثار آن در روایات بسیار تأکید شده است. این مقاله به بررسی فلسفه و احکام نماز می‌پردازد." data-ur="نماز اسلام میں سب سے اہم عبادت ہے جس کی اہمیت اور آثار پر روایات میں بہت زور دیا گیا ہے۔ یہ مقالہ نماز کے فلسفے اور احکام کا جائزہ پیش کرتا ہے۔" data-en="Prayer is the most important act of worship in Islam, whose significance and effects are greatly emphasized in narrations. This article examines the philosophy and rulings of prayer.">نماز مهم‌ترین عبادت در اسلام است که اهمیت و آثار آن در روایات بسیار تأکید شده است.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="توحید؛ اساس اعتقادات" data-ur="توحید: عقائد کی بنیاد" data-en="Monotheism: The Foundation of Beliefs">توحید؛ اساس اعتقادات</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: عقاید" data-ur="موضوع: عقائد" data-en="Topic: Beliefs">موضوع: عقاید</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="توحید بنیادی‌ترین اصل اعتقادی اسلام است. شناخت خداوند و انواع توحید از مباحث مهم کلامی محسوب می‌شود." data-ur="توحید اسلام کا بنیادی ترین عقیدہ ہے۔ اللہ کی معرفت اور توحید کی اقسام اہم کلامی موضوعات ہیں۔" data-en="Monotheism is the most fundamental belief in Islam. Knowledge of God and types of monotheism are important theological topics.">توحید بنیادی‌ترین اصل اعتقادی اسلام است.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="اخلاق اسلامی در خانواده" data-ur="خاندان میں اسلامی اخلاق" data-en="Islamic Ethics in Family">اخلاق اسلامی در خانواده</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: اخلاق" data-ur="موضوع: اخلاق" data-en="Topic: Ethics">موضوع: اخلاق</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="خانواده مهم‌ترین نهاد اجتماعی است. این مقاله به بررسی اصول اخلاقی حاکم بر روابط خانوادگی از دیدگاه اسلام می‌پردازد." data-ur="خاندان اہم ترین سماجی ادارہ ہے۔ یہ مقالہ اسلامی نقطہ نظر سے خاندانی تعلقات پر حاکم اخلاقی اصولوں کا جائزہ پیش کرتا ہے۔" data-en="Family is the most important social institution. This article examines ethical principles governing family relationships from an Islamic perspective.">خانواده مهم‌ترین نهاد اجتماعی است.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="حجاب در قرآن و سنت" data-ur="قرآن اور سنت میں حجاب" data-en="Hijab in Quran and Sunnah">حجاب در قرآن و سنت</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: فقه" data-ur="موضوع: فقہ" data-en="Topic: Jurisprudence">موضوع: فقه</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="بررسی ادله قرآنی و روایی حجاب و حدود و ثغور آن در فقه اسلامی با رویکردی تحقیقی و علمی." data-ur="اسلامی فقہ میں حجاب کے قرآنی اور روایتی دلائل اور اس کی حدود کا تحقیقی اور علمی جائزہ۔" data-en="An examination of Quranic and narrative evidence for hijab and its limits in Islamic jurisprudence with a research-based approach.">بررسی ادله قرآنی و روایی حجاب و حدود آن در فقه اسلامی.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="عدالت اجتماعی در اسلام" data-ur="اسلام میں سماجی انصاف" data-en="Social Justice in Islam">عدالت اجتماعی در اسلام</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: علوم انسانی" data-ur="موضوع: علوم انسانی" data-en="Topic: Human Sciences">موضوع: علوم انسانی</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="بررسی مبانی و روش‌های تحقق عدالت اجتماعی در نظام اسلامی و مقایسه آن با نظام‌های غربی." data-ur="اسلامی نظام میں سماجی انصاف کے اصول اور طریقے اور مغربی نظاموں سے اس کا موازنہ۔" data-en="Examining the foundations and methods of achieving social justice in Islamic system and comparing it with Western systems.">بررسی مبانی عدالت اجتماعی در نظام اسلامی.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3 class="translatable" data-fa="پاسخ به شبهه خشونت در اسلام" data-ur="اسلام میں تشدد کے شبہے کا جواب" data-en="Answering the Doubt of Violence in Islam">پاسخ به شبهه خشونت در اسلام</h3>
+                        <div class="article-meta">
+                            <span class="translatable" data-fa="نویسنده: ظفر اقبال مظفری" data-ur="مصنف: ظفر اقبال مظفری" data-en="Author: Zafar Iqbal Muzaffari">نویسنده: ظفر اقبال مظفری</span>
+                            <span class="translatable" data-fa="موضوع: پاسخ به شبهات" data-ur="موضوع: شبہات کے جوابات" data-en="Topic: Answering Doubts">موضوع: پاسخ به شبهات</span>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt translatable" data-fa="تحلیل و بررسی شبهه خشونت در اسلام با رویکردی عقلانی و نقلی و ارائه پاسخ‌های منطقی و مستدل." data-ur="اسلام میں تشدد کے شبہے کا عقلی اور نقلی نقطہ نظر سے تجزیہ اور منطقی دلائل کے ساتھ جواب۔" data-en="Analysis of the doubt about violence in Islam with rational and textual approach and providing logical answers.">تحلیل شبهه خشونت در اسلام با رویکردی عقلانی و نقلی.</p>
+                        <div class="article-actions">
+                            <a href="#" class="action-btn btn-read translatable" data-fa="مطالعه" data-ur="پڑھیں" data-en="Read">مطالعه</a>
+                            <a href="#" class="action-btn btn-listen translatable" data-fa="گوش دادن" data-ur="سنیں" data-en="Listen">گوش دادن</a>
+                            <a href="#" class="action-btn btn-download translatable" data-fa="دانلود PDF" data-ur="PDF ڈاؤن لوڈ" data-en="Download PDF">دانلود PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section - CONTINUES IN PART 2 -->
+        <!-- Courses Section -->
         <section id="courses" class="section">
             <div class="hero">
                 <h2 class="translatable" data-fa="دوره‌های آموزشی" data-ur="تعلیمی کورسز" data-en="Educational Courses">دوره‌های آموزشی</h2>
@@ -986,7 +1279,128 @@
             <div class="hero">
                 <h2 class="translatable" data-fa="تماس با ما" data-ur="ہم سے رابطہ کریں" data-en="Contact Us">تماس با ما</h2>
                 <p class="translatable" data-fa="برای دریافت اطلاعات بیشتر یا ثبت‌نام در دوره‌ها با ما در ارتباط باشید" data-ur="مزید معلومات یا کورسز میں اندراج کے لیے ہم سے رابطہ کریں" data-en="Contact us for more information or to enroll in courses">برای دریافت اطلاعات بیشتر یا ثبت‌نام در دوره‌ها با ما در ارتباط باشید</p>
-      <script>
+            </div>
+
+            <div class="contact-container">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 class="translatable" data-fa="فرم تماس" data-ur="رابطہ فارم" data-en="Contact Form">فرم تماس</h3>
+                    <form>
+                        <div class="form-group">
+                            <label class="translatable" data-fa="نام و نام خانوادگی" data-ur="نام" data-en="Full Name">نام و نام خانوادگی</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="translatable" data-fa="ایمیل" data-ur="ای میل" data-en="Email">ایمیل</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="translatable" data-fa="شماره تماس" data-ur="فون نمبر" data-en="Phone Number">شماره تماس</label>
+                            <input type="tel" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="translatable" data-fa="موضوع" data-ur="موضوع" data-en="Subject">موضوع</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="translatable" data-fa="پیام شما" data-ur="آپ کا پیغام" data-en="Your Message">پیام شما</label>
+                            <textarea required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn translatable" data-fa="ارسال پیام" data-ur="پیغام بھیجیں" data-en="Send Message">ارسال پیام</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-card">
+                    <h3 class="translatable" data-fa="اطلاعات تماس" data-ur="رابطہ کی معلومات" data-en="Contact Information">اطلاعات تماس</h3>
+                    
+                    <div class="info-item">
+                        <span class="info-icon">📞</span>
+                        <div class="info-text">
+                            <a href="tel:+989024064467">+989024064467</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">📱</span>
+                        <div class="info-text">
+                            <a href="tel:+989918126499">+989918126499</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">✉️</span>
+                        <div class="info-text">
+                            <a href="mailto:hafizzafariqbal327@gmail.com">hafizzafariqbal327@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">💬</span>
+                        <div class="info-text">
+                            <a href="https://wa.me/989024064467" target="_blank" class="translatable" data-fa="واتساپ" data-ur="واٹس ایپ" data-en="WhatsApp">واتساپ</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">📱</span>
+                        <div class="info-text">
+                            <a href="https://eitaa.com/Zafar1" target="_blank" class="translatable" data-fa="ایتا" data-ur="ایتا" data-en="Eitaa">ایتا</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div class="info-text translatable" data-fa="قم، ایران" data-ur="قم، ایران" data-en="Qom, Iran">قم، ایران</div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://wa.me/989024064467" target="_blank" class="social-btn">💬</a>
+                        <a href="https://eitaa.com/Zafar1" target="_blank" class="social-btn">📱</a>
+                        <a href="tel:+989024064467" class="social-btn">📞</a>
+                        <a href="mailto:hafizzafariqbal327@gmail.com" class="social-btn">✉️</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 class="translatable" data-fa="درباره ما" data-ur="ہمارے بارے میں" data-en="About Us">درباره ما</h4>
+                <p class="translatable" data-fa="مرکز فکری اسلامی المصباح با هدف ارتقای سطح دانش اسلامی و پاسخگویی به نیازهای علمی جامعه فعالیت می‌کند." data-ur="المصباح اسلامی فکری مرکز کا مقصد اسلامی علم کو فروغ دینا اور معاشرے کی علمی ضروریات کو پورا کرنا ہے۔" data-en="Al-Misbah Islamic Intellectual Center operates with the aim of promoting Islamic knowledge and meeting society's educational needs.">مرکز فکری اسلامی المصباح با هدف ارتقای سطح دانش اسلامی و پاسخگویی به نیازهای علمی جامعه فعالیت می‌کند.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="translatable" data-fa="دسترسی سریع" data-ur="فوری رسائی" data-en="Quick Access">دسترسی سریع</h4>
+                <a href="#" onclick="showSection('home')" class="translatable" data-fa="صفحه اصلی" data-ur="مین صفحہ" data-en="Home">صفحه اصلی</a>
+                <a href="#" onclick="showSection('articles')" class="translatable" data-fa="مقالات" data-ur="مقالات" data-en="Articles">مقالات</a>
+                <a href="#" onclick="showSection('courses')" class="translatable" data-fa="دوره‌ها" data-ur="کورسز" data-en="Courses">دوره‌ها</a>
+                <a href="#" onclick="showSection('books')" class="translatable" data-fa="کتابخانه" data-ur="کتب خانہ" data-en="Library">کتابخانه</a>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="translatable" data-fa="تماس با ما" data-ur="رابطہ" data-en="Contact">تماس با ما</h4>
+                <a href="tel:+989024064467">📞 +989024064467</a>
+                <a href="tel:+989918126499">📱 +989918126499</a>
+                <a href="mailto:hafizzafariqbal327@gmail.com">✉️ hafizzafariqbal327@gmail.com</a>
+                <a href="https://wa.me/989024064467" target="_blank">💬 WhatsApp</a>
+                <a href="https://eitaa.com/Zafar1" target="_blank">📱 Eitaa</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="translatable" data-fa="© 1404 مرکز فکری اسلامی المصباح - تمامی حقوق محفوظ است | مدیر و بنیانگذار: ظفر اقبال مظفری" data-ur="© 1404 المصباح اسلامی فکری مرکز - تمام حقوق محفوظ ہیں | منیجر اور بانی: ظفر اقبال مظفری" data-en="© 2025 Al-Misbah Islamic Intellectual Center - All Rights Reserved | Manager & Founder: Zafar Iqbal Muzaffari">© 1404 مرکز فکری اسلامی المصباح - تمامی حقوق محفوظ است | مدیر و بنیانگذار: ظفر اقبال مظفری</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <!-- JAVASCRIPT CONTINUES IN PART 3 -->
+    <script>
         // ============================================
         // LANGUAGE SWITCHING FUNCTIONALITY
         // ============================================
@@ -1050,7 +1464,7 @@
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            event.target.classList.remove('active');
+            event.target.classList.add('active');
 
             // Close mobile menu if open
             const nav = document.querySelector('.nav-links');
@@ -1115,28 +1529,26 @@
         // ============================================
         // CONTACT FORM SUBMISSION
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.querySelector('.contact-form form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const formData = new FormData(this);
-                    
-                    // Show success message
-                    const messages = {
-                        'fa': 'پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.',
-                        'ur': 'آپ کا پیغام کامیابی سے بھیج دیا گیا ہے۔ ہم جلد ہی آپ سے رابطہ کریں گے۔',
-                        'en': 'Your message has been sent successfully. We will contact you soon.'
-                    };
-                    
-                    alert(messages[currentLanguage]);
-                    
-                    // Reset form
-                    this.reset();
-                });
-            }
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(this);
+            
+            // Show success message (you can customize this)
+            const messages = {
+                'fa': 'پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.',
+                'ur': 'آپ کا پیغام کامیابی سے بھیج دیا گیا ہے۔ ہم جلد ہی آپ سے رابطہ کریں گے۔',
+                'en': 'Your message has been sent successfully. We will contact you soon.'
+            };
+            
+            alert(messages[currentLanguage]);
+            
+            // Reset form
+            this.reset();
+            
+            // Here you can add actual form submission logic
+            // For example, sending data to a backend API
         });
 
         // ============================================
@@ -1169,7 +1581,7 @@
         });
 
         // ============================================
-        // SEARCH FUNCTIONALITY
+        // SEARCH FUNCTIONALITY (Optional Enhancement)
         // ============================================
         function searchContent() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
@@ -1202,6 +1614,9 @@
                 };
                 
                 alert(messages[currentLanguage]);
+                
+                // Here you can add actual download logic
+                // For example: window.location.href = 'path/to/file.pdf';
             });
         });
 
@@ -1219,6 +1634,8 @@
                 };
                 
                 alert(messages[currentLanguage]);
+                
+                // Here you can add actual audio player logic
             });
         });
 
@@ -1245,20 +1662,14 @@
         // INITIALIZE ON PAGE LOAD
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Set default language to Farsi
-            const faButton = document.querySelector('.lang-btn[onclick*="fa"]');
-            if (faButton) {
-                faButton.classList.add('active');
-            }
+            // Set default language
+            switchLanguage('fa');
             
             // Show home section by default
             document.querySelectorAll('.section').forEach(section => {
                 section.style.display = 'none';
             });
-            const homeSection = document.getElementById('home');
-            if (homeSection) {
-                homeSection.style.display = 'block';
-            }
+            document.getElementById('home').style.display = 'block';
             
             // Add fade-in animation to all sections
             const observer = new IntersectionObserver((entries) => {
@@ -1281,6 +1692,12 @@
         });
 
         // ============================================
+        // PREVENT RIGHT CLICK (Optional Security)
+        // ============================================
+        // Uncomment if you want to disable right-click
+        // document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // ============================================
         // KEYBOARD SHORTCUTS
         // ============================================
         document.addEventListener('keydown', function(e) {
@@ -1294,16 +1711,21 @@
             // ESC to close mobile menu
             if (e.key === 'Escape') {
                 const nav = document.querySelector('.nav-links');
-                if (nav && nav.classList.contains('active')) {
+                if (nav.classList.contains('active')) {
                     nav.classList.remove('active');
-                    const burger = document.querySelector('.burger-menu');
-                    if (burger) burger.classList.remove('active');
                 }
             }
         });
 
         // ============================================
-        // SHARE FUNCTIONALITY
+        // PRINT FUNCTIONALITY (Optional)
+        // ============================================
+        function printPage() {
+            window.print();
+        }
+
+        // ============================================
+        // SHARE FUNCTIONALITY (Optional)
         // ============================================
         async function shareContent(title, text, url) {
             if (navigator.share) {
@@ -1317,19 +1739,15 @@
                     console.log('Error sharing:', err);
                 }
             } else {
+                // Fallback for browsers that don't support Web Share API
                 const shareUrl = window.location.href;
                 navigator.clipboard.writeText(shareUrl);
-                const messages = {
-                    'fa': 'لینک کپی شد!',
-                    'ur': 'لنک کاپی ہو گیا!',
-                    'en': 'Link copied!'
-                };
-                alert(messages[currentLanguage]);
+                alert('لینک کپی شد! / Link copied!');
             }
         }
 
         // ============================================
-        // THEME TOGGLE (Dark/Light Mode)
+        // THEME TOGGLE (Dark/Light Mode - Optional)
         // ============================================
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
@@ -1346,7 +1764,7 @@
         });
 
         // ============================================
-        // CONSOLE GREETING
+        // CONSOLE EASTER EGG
         // ============================================
         console.log('%c🌙 المصباح - Al-Misbah Islamic Knowledge Center', 'font-size: 20px; color: #1a237e; font-weight: bold;');
         console.log('%c👨‍🏫 Manager & Founder: Zafar Iqbal Muzaffari', 'font-size: 14px; color: #283593;');
@@ -1355,5 +1773,3 @@
     </script>
 </body>
 </html>
-
-        
